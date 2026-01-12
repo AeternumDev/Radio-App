@@ -33,3 +33,6 @@ tsconfig.tsbuildinfo
 
 # vercel
 .vercel
+
+# Visual Studio Code
+.vscode/*
