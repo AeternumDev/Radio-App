@@ -25,7 +25,7 @@ const Tabs = () => {
     sessionStorage.removeItem('isLoggedIn');
     sessionStorage.removeItem('role');
     // Weitere Logik, z.B. Weiterleitung zur Login-Seite
-    history.push('/dashboard'); // Weiterleitung zur Dashboard-Seite
+    history.push('/login'); // Weiterleitung zur Login-Seite
   };
   return (
     <IonTabs>
