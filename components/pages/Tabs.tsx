@@ -1,4 +1,4 @@
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import {
   IonRouterOutlet,
   IonTabs,
@@ -17,6 +17,16 @@ import ListDetail from './ListDetail';
 import Settings from './Settings';
 
 const Tabs = () => {
+  const history = useHistory();
+  
+  const handleLogout = () => {
+    // Logout-Logik
+    console.log('Logout');
+    sessionStorage.removeItem('isLoggedIn');
+    sessionStorage.removeItem('role');
+    // Weitere Logik, z.B. Weiterleitung zur Login-Seite
+    history.push('/dashboard'); // Weiterleitung zur Dashboard-Seite
+  };
   return (
     <IonTabs>
       <IonRouterOutlet>
@@ -54,6 +64,10 @@ const Tabs = () => {
         <IonTabButton tab="tab5" href="/login">
           <IonIcon icon={cog} />
           <IonLabel>Login</IonLabel>
+        </IonTabButton>
+        <IonTabButton tab="tab5" onClick={handleLogout}>
+          <IonIcon icon={cog} />
+          <IonLabel>Logout</IonLabel>
         </IonTabButton>
       </IonTabBar>
     </IonTabs>
