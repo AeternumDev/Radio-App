@@ -7,7 +7,7 @@ import {
   IonIcon,
   IonLabel,
 } from '@ionic/react';
-import { cog, flash, list } from 'ionicons/icons';
+import { cog, flash, list, personCircleOutline } from 'ionicons/icons';
 
 import Login from './Login';
 import Dashboard from './Dashboard';
@@ -18,13 +18,14 @@ import Settings from './Settings';
 
 const Tabs = () => {
   const history = useHistory();
-  
-  const handleLogout = () => {
-    // Logout-Logik
-    console.log('Logout');
-    sessionStorage.removeItem('isLoggedIn');
-    sessionStorage.removeItem('role');
-    // Weitere Logik, z.B. Weiterleitung zur Login-Seite
+  const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+
+  const handleLoginLogout = () => {
+    if (isLoggedIn === 'true') {
+      console.log('Logout');
+      sessionStorage.removeItem('isLoggedIn');
+      sessionStorage.removeItem('role');
+    }
     history.push('/login'); // Weiterleitung zur Login-Seite
   };
   return (
@@ -61,13 +62,9 @@ const Tabs = () => {
           <IonIcon icon={cog} />
           <IonLabel>Dashboard</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="tab5" href="/login">
-          <IonIcon icon={cog} />
-          <IonLabel>Login</IonLabel>
-        </IonTabButton>
-        <IonTabButton tab="tab5" onClick={handleLogout}>
-          <IonIcon icon={cog} />
-          <IonLabel>Logout</IonLabel>
+        <IonTabButton tab="tab5" onClick={handleLoginLogout}>
+          <IonIcon icon={personCircleOutline} />
+          {(isLoggedIn === 'true' && <IonLabel>Logout</IonLabel>) || <IonLabel>Login</IonLabel>}
         </IonTabButton>
       </IonTabBar>
     </IonTabs>
