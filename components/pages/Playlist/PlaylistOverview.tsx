@@ -48,7 +48,7 @@ const PlaylistOverview = ({
         </IonToolbar>
       </IonHeader>
 
-      // Song Übersicht der Playlist
+       { /* Song-Übersicht der Playlist */ }
       <IonContent className="ion-padding">
         {playlist.songs.map((s, index) => (
           <IonCard key={index}>
@@ -58,7 +58,7 @@ const PlaylistOverview = ({
           </IonCard>
         ))}
 
-        // Aktuelles "geladenes" Rating der Playlist
+         { /* Aktuelles "geladenes" Rating der Playlist */ }
         {currentRating !== null && (
           <p className="text-center">
             Aktuelle Bewertung: {currentRating.toFixed(1)} ★
@@ -67,7 +67,7 @@ const PlaylistOverview = ({
 
         <h3 className="text-center mt-4">Playlist bewerten</h3>
 
-        // Bewertungsfeld für die Playlist
+        { /* Bewertungsfeld für die Playlist */ }
         <div className="flex justify-center space-x-2 my-3">
           {[1, 2, 3, 4, 5].map(n => (
             <IonButton
@@ -80,12 +80,12 @@ const PlaylistOverview = ({
           ))}
         </div>
 
-        // Sendet die Bewertung über den Stub
+        { /* Sendet die Bewertung über den Stub */ }
         <IonButton expand="block" onClick={() => onSubmitRating(rating)}>
           Bewertung absenden
         </IonButton>
 
-        // Zurück zur Playlists
+        { /* Zurück zur Playlists */ }
         <IonButton expand="block" fill="clear" onClick={onBack}>
           Zurück
         </IonButton>
