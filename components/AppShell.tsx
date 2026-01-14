@@ -1,10 +1,12 @@
 'use client';
+import { useEffect } from 'react';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { IonReactRouter } from '@ionic/react-router';
 import { Route } from 'react-router-dom';
 
 import Tabs from './pages/Tabs';
+import { UserRepository } from '@/lib/indexeddb/user-repository';
 
 setupIonicReact({});
 
@@ -19,6 +21,9 @@ window
   });
 
 const AppShell = () => {
+  useEffect(() => {
+    UserRepository.initStubData(); // <- Stub-Daten einmalig laden
+  }, []);
   return (
     <IonApp>
       <IonReactRouter>
