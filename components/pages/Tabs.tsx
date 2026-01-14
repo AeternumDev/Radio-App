@@ -15,6 +15,8 @@ import Home from './Feed';
 import Lists from './Lists';
 import ListDetail from './ListDetail';
 import Settings from './Settings';
+import Playlist from './Playlist/Playlists';
+
 
 const Tabs = () => {
   const history = useHistory();
@@ -36,6 +38,7 @@ const Tabs = () => {
           <Route path="/dashboard" render={() => <Dashboard />} exact={true} />
           <Route path="/feed" render={() => <Home />} exact={true} />
           <Route path="/lists" render={() => <Lists />} exact={true} />
+          <Route path="/playlist" render={() => <Playlist />} exact={true} />
           <Route
             path="/lists/:listId"
             render={() => <ListDetail />}
@@ -66,6 +69,10 @@ const Tabs = () => {
           <IonIcon icon={personCircleOutline} />
           {(isLoggedIn === 'true' && <IonLabel>Logout</IonLabel>) || <IonLabel>Login</IonLabel>}
         </IonTabButton>
+        <IonTabButton tab="tab6" href="/playlist">
+            <IonIcon icon={list} />
+            <IonLabel>Playlists</IonLabel>
+            </IonTabButton>
       </IonTabBar>
     </IonTabs>
   );
