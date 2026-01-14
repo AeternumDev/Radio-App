@@ -24,15 +24,18 @@ export class UserEntity implements User {
     return this._reviews;
   }
 
+  // Neue Review hinzufügen und Listener benachrichtigen
   addReview(review: string, notify = true): void {
     this._reviews.push(review);
     if (notify) this.emitReviewAdded(review);
   }
 
+  // Listener für hinzugefügte Reviews registrieren
   onReviewAdded(listener: ReviewListener): void {
     this.listeners.push(listener);
   }
 
+  // Event-Emitter für hinzugefügte Reviews
   private emitReviewAdded(review: string): void {
     this.listeners.forEach(l => l(review));
   }
