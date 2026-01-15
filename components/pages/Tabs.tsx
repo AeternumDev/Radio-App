@@ -7,7 +7,7 @@ import {
   IonIcon,
   IonLabel,
 } from '@ionic/react';
-import { cog, flash, radio, personCircleOutline } from 'ionicons/icons';
+import { cog, flash, radio, personCircleOutline, list } from 'ionicons/icons';
 
 import Login from './Login';
 import Dashboard from './Dashboard';
@@ -79,3 +79,4 @@ const Tabs = () => {
 };
 
 export default Tabs;
+
