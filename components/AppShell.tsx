@@ -7,6 +7,8 @@ import { Route } from 'react-router-dom';
 
 import Tabs from './pages/Tabs';
 import { UserRepository } from '@/lib/indexeddb/user-repository';
+import { radioService } from '@/lib/services/radio-service';
+import { radioStations } from '@/mock';
 
 setupIonicReact({});
 
@@ -23,6 +25,7 @@ window
 const AppShell = () => {
   useEffect(() => {
     UserRepository.initStubData(); // <- Stub-Daten einmalig laden
+    radioService.initialize(radioStations); // <- Initialisiere Radio-Service
   }, []);
   return (
     <IonApp>

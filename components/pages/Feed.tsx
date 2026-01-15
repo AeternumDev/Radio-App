@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Card from '../ui/Card';
+import NowPlaying from '../ui/NowPlaying';
 
 import {
   IonPage,
@@ -15,7 +16,7 @@ import {
 import Notifications from './Notifications';
 import { useState } from 'react';
 import { notificationsOutline } from 'ionicons/icons';
-import { selectHomeItems } from '../../store/selectors';
+import { selectHomeItems, selectCurrentTrack } from '../../store/selectors';
 import Store from '../../store';
 
 type FeedCardProps = {
@@ -73,6 +74,7 @@ const FeedCard = ({
 
 const Feed = () => {
   const homeItems = Store.useState(selectHomeItems);
+  const currentTrack = Store.useState(selectCurrentTrack);
   const [showNotifications, setShowNotifications] = useState(false);
 
   return (
@@ -96,6 +98,7 @@ const Feed = () => {
             <IonTitle size="large">Feed</IonTitle>
           </IonToolbar>
         </IonHeader>
+        <NowPlaying track={currentTrack} />
         <Notifications
           open={showNotifications}
           onDidDismiss={() => setShowNotifications(false)}

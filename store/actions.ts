@@ -1,5 +1,6 @@
 import Store from '.';
 import { ListItem, Settings, TodoListItem } from '../mock';
+import type { RadioStation } from '../lib/models';
 
 export const setMenuOpen = (open: boolean) => {
   Store.update(s => {
@@ -16,6 +17,16 @@ export const setNotificationsOpen = (open: boolean) => {
 export const setSettings = (settings: Settings) => {
   Store.update(s => {
     s.settings = settings;
+  });
+};
+
+export const setSelectedStation = (station: RadioStation | null) => {
+  Store.update(s => {
+    s.selectedStation = station;
+    // Aktualisiere auch den currentTrack mit dem Track der Station
+    if (station?.currentTrack) {
+      s.currentTrack = station.currentTrack;
+    }
   });
 };
 

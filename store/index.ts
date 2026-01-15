@@ -1,6 +1,7 @@
 import { Store as PullStateStore } from 'pullstate';
 
-import { lists, homeItems, notifications, settings, TodoListItem, HomeItem, NotificationItem, Settings } from '../mock';
+import { lists, homeItems, notifications, settings, currentTrack, radioStations, TodoListItem, HomeItem, NotificationItem, Settings } from '../mock';
+import type { Track, RadioStation } from '../lib/models';
 
 type StoreProps = {
   safeAreaTop: number;
@@ -13,6 +14,9 @@ type StoreProps = {
   notifications: NotificationItem[];
   settings: Settings;
   selectedList: TodoListItem | undefined;
+  currentTrack: Track | null;
+  radioStations: RadioStation[];
+  selectedStation: RadioStation | null;
 }
 
 const Store = new PullStateStore<StoreProps>({
@@ -26,6 +30,9 @@ const Store = new PullStateStore<StoreProps>({
   notifications,
   settings,
   selectedList: undefined,
+  currentTrack,
+  radioStations,
+  selectedStation: null,
 });
 
 export default Store;

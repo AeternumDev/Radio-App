@@ -7,7 +7,7 @@ import {
   IonIcon,
   IonLabel,
 } from '@ionic/react';
-import { cog, flash, list, personCircleOutline } from 'ionicons/icons';
+import { cog, flash, radio, personCircleOutline } from 'ionicons/icons';
 
 import Login from './Login';
 import Dashboard from './Dashboard';
@@ -54,8 +54,8 @@ const Tabs = () => {
           <IonLabel>Feed</IonLabel>
         </IonTabButton>
         <IonTabButton tab="tab2" href="/lists">
-          <IonIcon icon={list} />
-          <IonLabel>Lists</IonLabel>
+          <IonIcon icon={radio} />
+          <IonLabel>Radiosender</IonLabel>
         </IonTabButton>
         <IonTabButton tab="tab3" href="/settings">
           <IonIcon icon={cog} />
