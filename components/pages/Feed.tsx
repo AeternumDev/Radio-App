@@ -18,6 +18,7 @@ import { useState } from 'react';
 import { notificationsOutline } from 'ionicons/icons';
 import { selectHomeItems, selectCurrentTrack } from '../../store/selectors';
 import Store from '../../store';
+import SongRequest from './SongRequest';
 
 type FeedCardProps = {
   title: string;
@@ -76,6 +77,7 @@ const Feed = () => {
   const homeItems = Store.useState(selectHomeItems);
   const currentTrack = Store.useState(selectCurrentTrack);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [songRequestOpen, setSongRequestOpen] = useState(false);
 
   return (
     <IonPage>
@@ -89,6 +91,9 @@ const Feed = () => {
             <IonButton onClick={() => setShowNotifications(true)}>
               <IonIcon icon={notificationsOutline} />
             </IonButton>
+             <IonButton onClick={() => setSongRequestOpen(true)}>
+                Song wünschen
+             </IonButton>
           </IonButtons>
         </IonToolbar>
       </IonHeader>
@@ -103,6 +108,7 @@ const Feed = () => {
           open={showNotifications}
           onDidDismiss={() => setShowNotifications(false)}
         />
+        <SongRequest open={songRequestOpen} onClose={() => setSongRequestOpen(false)}/>
         {homeItems.map((i, index) => (
           <FeedCard {...i} key={index} />
         ))}
