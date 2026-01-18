@@ -75,6 +75,7 @@ export interface IRadioStationAPI {
  */
 export class NowPlayingAPIStub implements INowPlayingAPI {
   private mockTracks: Map<string, Track> = new Map();
+  private mockHistory: Map<string, Track[]> = new Map();
 
   async getCurrentTrack(stationId: string): Promise<Track | null> {
     // Simuliere Netzwerk-Verzögerung
@@ -88,7 +89,8 @@ export class NowPlayingAPIStub implements INowPlayingAPI {
     await this.delay(150);
     
     // Simuliere Track-History (würde normalerweise vom Server kommen)
-    return [];
+    const history = this.mockHistory.get(stationId) || [];
+    return history.slice(0, limit);
   }
 
   /**
@@ -96,6 +98,13 @@ export class NowPlayingAPIStub implements INowPlayingAPI {
    */
   setMockTrack(stationId: string, track: Track): void {
     this.mockTracks.set(stationId, track);
+  }
+
+  /**
+   * Hilfsmethode zum Setzen von Mock-History (nur für Stub-Implementierung)
+   */
+  setMockHistory(stationId: string, tracks: Track[]): void {
+    this.mockHistory.set(stationId, tracks);
   }
 
   private delay(ms: number): Promise<void> {

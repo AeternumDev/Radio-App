@@ -30,6 +30,37 @@ export const setSelectedStation = (station: RadioStation | null) => {
   });
 };
 
+export const playStation = (station: RadioStation) => {
+  Store.update(s => {
+    s.playingStation = station;
+    s.isPlaying = true;
+    if (station.currentTrack) {
+      s.currentTrack = station.currentTrack;
+    }
+  });
+};
+
+export const pausePlayback = () => {
+  Store.update(s => {
+    s.isPlaying = false;
+  });
+};
+
+export const resumePlayback = () => {
+  Store.update(s => {
+    if (s.playingStation) {
+      s.isPlaying = true;
+    }
+  });
+};
+
+export const stopPlayback = () => {
+  Store.update(s => {
+    s.playingStation = null;
+    s.isPlaying = false;
+  });
+};
+
 // App-specific actions
 
 export const setDone = (

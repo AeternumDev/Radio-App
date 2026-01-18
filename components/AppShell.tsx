@@ -6,6 +6,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import { Route } from 'react-router-dom';
 
 import Tabs from './pages/Tabs';
+import GlobalNowPlaying from './ui/GlobalNowPlaying';
 import { UserRepository } from '@/lib/indexeddb/user-repository';
 import { radioService } from '@/lib/services/radio-service';
 import { radioStations } from '@/mock';
@@ -33,6 +34,7 @@ const AppShell = () => {
         <IonRouterOutlet id="main">
           <Route path="/" render={() => <Tabs />} />
         </IonRouterOutlet>
+        <GlobalNowPlaying />
       </IonReactRouter>
     </IonApp>
   );

@@ -1,5 +1,6 @@
 import Store from '../../store';
 import * as selectors from '../../store/selectors';
+import * as actions from '../../store/actions';
 import type { RadioStation } from '@/lib/models';
 import {
   IonPage,
@@ -7,46 +8,83 @@ import {
   IonToolbar,
   IonTitle,
   IonContent,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonNote,
-  IonAvatar,
 } from '@ionic/react';
 import Image from 'next/image';
+import { useHistory } from 'react-router-dom';
+import { radioOutline, playOutline } from 'ionicons/icons';
+import { IonIcon } from '@ionic/react';
 
-const StationEntry = ({ station }: { station: RadioStation }) => {
+const StationCard = ({ station }: { station: RadioStation }) => {
+  const history = useHistory();
+  const playingStation = Store.useState(selectors.selectPlayingStation);
+  const isPlaying = Store.useState(selectors.selectIsPlaying);
+  
+  const isThisPlaying = playingStation?.id === station.id && isPlaying;
+  
+  const handleCardClick = () => {
+    // Start playing this station
+    actions.playStation(station);
+    // Navigate to detail page
+    history.push(`/lists/${station.id}`);
+  };
+
+  const handlePlayClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (isThisPlaying) {
+      actions.pausePlayback();
+    } else if (playingStation?.id === station.id) {
+      actions.resumePlayback();
+    } else {
+      actions.playStation(station);
+    }
+  };
+  
   return (
-    <IonItem routerLink={`/lists/${station.id}`} className="station-entry">
-      <IonAvatar slot="start">
-        {station.logo && (
-          <div className="w-full h-full relative">
-            <Image
-              src={station.logo}
-              alt={station.name}
-              fill
-              className="object-cover"
-            />
+    <div 
+      className="glass-station-card" 
+      onClick={handleCardClick}
+    >
+      <div className="glass-station-avatar">
+        {station.logo ? (
+          <Image
+            src={station.logo}
+            alt={station.name}
+            fill
+            className="object-cover"
+          />
+        ) : (
+          <div style={{ 
+            width: '100%', 
+            height: '100%', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center' 
+          }}>
+            <IonIcon icon={radioOutline} style={{ fontSize: '24px', opacity: 0.4 }} />
           </div>
         )}
-      </IonAvatar>
-      <IonLabel>
-        <h2 className="font-bold">{station.name}</h2>
-        <p className="text-sm text-gray-600 dark:text-gray-400">
-          {station.description}
-        </p>
+        {/* Play indicator overlay */}
+        {isThisPlaying && (
+          <div className="station-playing-indicator">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        )}
+      </div>
+      <div className="glass-station-info">
+        <h3 className="glass-station-name">{station.name}</h3>
+        <p className="glass-station-description">{station.description}</p>
         {station.currentTrack && (
-          <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-            🎵 {station.currentTrack.artist} - {station.currentTrack.title}
+          <p className="glass-station-track">
+            {station.currentTrack.artist} — {station.currentTrack.title}
           </p>
         )}
-      </IonLabel>
-      <IonNote slot="end" className="text-xs">
-        {station.frequency}
-        <br />
-        <span className="text-gray-500">{station.genre}</span>
-      </IonNote>
-    </IonItem>
+      </div>
+      <button className="station-quick-play" onClick={handlePlayClick}>
+        <IonIcon icon={playOutline} />
+      </button>
+    </div>
   );
 };
 
@@ -54,31 +92,29 @@ const AllStations = () => {
   const stations = Store.useState(selectors.selectRadioStations);
 
   return (
-    <>
+    <div className="glass-list-container">
       {stations.map((station, i) => (
-        <StationEntry station={station} key={i} />
+        <StationCard station={station} key={i} />
       ))}
-    </>
+    </div>
   );
 };
 
 const Lists = () => {
   return (
     <IonPage>
-      <IonHeader translucent={true}>
+      <IonHeader translucent={true} className="glass-page-header">
         <IonToolbar>
           <IonTitle>Radiosender</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen={true}>
-        <IonHeader collapse="condense">
+        <IonHeader collapse="condense" className="glass-page-header">
           <IonToolbar>
             <IonTitle size="large">Radiosender</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <IonList>
-          <AllStations />
-        </IonList>
+        <AllStations />
       </IonContent>
     </IonPage>
   );

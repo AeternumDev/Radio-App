@@ -6,22 +6,23 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
-  IonChip,
-  IonLabel,
   IonIcon,
 } from '@ionic/react';
-import { useParams, useHistory } from 'react-router-dom';
-import { radioOutline, musicalNotesOutline } from 'ionicons/icons';
+import { useParams } from 'react-router-dom';
+import { 
+  radioOutline, 
+  playOutline, 
+  pauseOutline,
+  musicalNotesOutline,
+  locationOutline,
+  signalOutline
+} from 'ionicons/icons';
 import { useEffect } from 'react';
+import Image from 'next/image';
 
 import Store from '../../store';
 import * as actions from '../../store/actions';
 import * as selectors from '../../store/selectors';
-import NowPlaying from '../ui/NowPlaying';
 
 type StationDetailParams = {
   listId: string;
@@ -30,27 +31,40 @@ type StationDetailParams = {
 const StationDetail = () => {
   const stations = Store.useState(selectors.selectRadioStations);
   const currentTrack = Store.useState(selectors.selectCurrentTrack);
+  const playingStation = Store.useState(selectors.selectPlayingStation);
+  const isPlaying = Store.useState(selectors.selectIsPlaying);
   const params = useParams<StationDetailParams>();
-  const history = useHistory();
   const { listId } = params;
   const station = stations.find(s => s.id === listId);
 
+  const isThisStationPlaying = playingStation?.id === station?.id && isPlaying;
+
   useEffect(() => {
     if (station) {
-      // Setze die ausgewählte Station im Store
       actions.setSelectedStation(station);
     }
     
     return () => {
-      // Cleanup beim Verlassen der Seite
       actions.setSelectedStation(null);
     };
   }, [station]);
 
+  const handlePlayPause = () => {
+    if (!station) return;
+    
+    if (isThisStationPlaying) {
+      actions.pausePlayback();
+    } else if (playingStation?.id === station.id) {
+      actions.resumePlayback();
+    } else {
+      actions.playStation(station);
+    }
+  };
+
   if (!station) {
     return (
       <IonPage>
-        <IonHeader>
+        <IonHeader className="glass-page-header">
           <IonToolbar>
             <IonButtons slot="start">
               <IonBackButton defaultHref="/lists" />
@@ -59,7 +73,8 @@ const StationDetail = () => {
           </IonToolbar>
         </IonHeader>
         <IonContent>
-          <div className="p-4">
+          <div className="station-not-found">
+            <IonIcon icon={radioOutline} />
             <p>Die gesuchte Station wurde nicht gefunden.</p>
           </div>
         </IonContent>
@@ -69,62 +84,122 @@ const StationDetail = () => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader className="glass-page-header">
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/lists" />
+            <IonBackButton defaultHref="/lists" className="glass-back-btn" />
           </IonButtons>
           <IonTitle>{station.name}</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding">
-        {/* Station Info Card */}
-        <IonCard>
-          <IonCardHeader>
-            <div className="flex items-center justify-between">
-              <IonCardTitle>{station.name}</IonCardTitle>
-              <IonIcon icon={radioOutline} className="text-3xl text-primary" />
-            </div>
-          </IonCardHeader>
-          <IonCardContent>
-            <p className="text-gray-700 dark:text-gray-300 mb-3">
-              {station.description}
-            </p>
-            <div className="flex flex-wrap gap-2 mb-3">
-              <IonChip color="primary">
-                <IonLabel>{station.frequency}</IonLabel>
-              </IonChip>
-              <IonChip color="secondary">
-                <IonIcon icon={musicalNotesOutline} />
-                <IonLabel>{station.genre}</IonLabel>
-              </IonChip>
-            </div>
-            {station.streamUrl && (
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-                Stream: {station.streamUrl}
-              </p>
+      <IonContent className="station-detail-content">
+        {/* Hero Section */}
+        <div className="station-hero">
+          <div className="station-hero-bg">
+            {station.logo && (
+              <Image
+                src={station.logo}
+                alt=""
+                fill
+                className="object-cover"
+              />
             )}
-          </IonCardContent>
-        </IonCard>
-
-        {/* Now Playing Section */}
-        <div className="mt-4">
-          <h3 className="text-lg font-bold mb-2 px-2">Jetzt läuft</h3>
-          <NowPlaying track={currentTrack} />
+            <div className="station-hero-overlay" />
+          </div>
+          
+          <div className="station-hero-content">
+            <div className="station-logo-large">
+              {station.logo ? (
+                <Image
+                  src={station.logo}
+                  alt={station.name}
+                  fill
+                  className="object-cover"
+                />
+              ) : (
+                <IonIcon icon={radioOutline} />
+              )}
+            </div>
+            
+            <h1 className="station-title">{station.name}</h1>
+            <p className="station-tagline">{station.description}</p>
+            
+            <div className="station-meta-row">
+              <span className="station-meta-item">
+                <IonIcon icon={signalOutline} />
+                {station.frequency}
+              </span>
+              <span className="station-meta-item">
+                <IonIcon icon={musicalNotesOutline} />
+                {station.genre}
+              </span>
+            </div>
+          </div>
         </div>
 
-        {/* Info Section */}
-        <IonCard className="mt-4">
-          <IonCardHeader>
-            <IonCardTitle className="text-base">Über diesen Sender</IonCardTitle>
-          </IonCardHeader>
-          <IonCardContent>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+        {/* Play Button */}
+        <div className="station-play-section">
+          <button 
+            className={`station-play-btn ${isThisStationPlaying ? 'playing' : ''}`}
+            onClick={handlePlayPause}
+          >
+            <IonIcon icon={isThisStationPlaying ? pauseOutline : playOutline} />
+            <span>{isThisStationPlaying ? 'Pause' : 'Abspielen'}</span>
+          </button>
+        </div>
+
+        {/* Now Playing Card */}
+        {currentTrack && (
+          <div className="station-now-playing">
+            <div className="snp-header">
+              <span className="snp-label">Jetzt läuft</span>
+              {isThisStationPlaying && (
+                <div className="snp-live-indicator">
+                  <span className="snp-live-dot" />
+                  LIVE
+                </div>
+              )}
+            </div>
+            <div className="snp-content">
+              <div className="snp-artwork">
+                {currentTrack.coverArt ? (
+                  <Image
+                    src={currentTrack.coverArt}
+                    alt="Cover"
+                    fill
+                    className="object-cover"
+                  />
+                ) : (
+                  <IonIcon icon={musicalNotesOutline} />
+                )}
+              </div>
+              <div className="snp-info">
+                <h3 className="snp-title">{currentTrack.title}</h3>
+                <p className="snp-artist">{currentTrack.artist}</p>
+                {currentTrack.album && (
+                  <p className="snp-album">{currentTrack.album}</p>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Station Info */}
+        <div className="station-info-section">
+          <h2 className="station-section-title">Über diesen Sender</h2>
+          <div className="station-info-card">
+            <p>
               {station.name} sendet auf {station.frequency} und bietet die beste Auswahl an {station.genre.toLowerCase()}.
               Der Stream ist rund um die Uhr verfügbar und liefert hochwertige Musikunterhaltung.
             </p>
-          </IonCardContent>
-        </IonCard>
+            {station.streamUrl && (
+              <div className="station-stream-url">
+                <span className="stream-label">Stream URL</span>
+                <span className="stream-value">{station.streamUrl}</span>
+              </div>
+            )}
+          </div>
+        </div>
       </IonContent>
     </IonPage>
   );

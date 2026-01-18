@@ -17,6 +17,8 @@ type StoreProps = {
   currentTrack: Track | null;
   radioStations: RadioStation[];
   selectedStation: RadioStation | null;
+  playingStation: RadioStation | null;
+  isPlaying: boolean;
 }
 
 const Store = new PullStateStore<StoreProps>({
@@ -33,6 +35,8 @@ const Store = new PullStateStore<StoreProps>({
   currentTrack,
   radioStations,
   selectedStation: null,
+  playingStation: null,
+  isPlaying: false,
 });
 
 export default Store;

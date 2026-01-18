@@ -7,7 +7,15 @@ import {
   IonIcon,
   IonLabel,
 } from '@ionic/react';
-import { cog, flash, radio, personCircleOutline, list } from 'ionicons/icons';
+import { 
+  homeOutline, 
+  radioOutline, 
+  settingsOutline, 
+  gridOutline, 
+  logInOutline, 
+  logOutOutline,
+  musicalNotesOutline 
+} from 'ionicons/icons';
 
 import Login from './Login';
 import Dashboard from './Dashboard';
@@ -48,31 +56,31 @@ const Tabs = () => {
           <Route path="" render={() => <Redirect to="/feed" />} exact={true} />
         </Switch>
       </IonRouterOutlet>
-      <IonTabBar slot="bottom">
-        <IonTabButton tab="tab1" href="/feed">
-          <IonIcon icon={flash} />
+      <IonTabBar slot="bottom" className="glass-tab-bar">
+        <IonTabButton tab="tab1" href="/feed" className="glass-tab-button">
+          <IonIcon icon={homeOutline} />
           <IonLabel>Feed</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="tab2" href="/lists">
-          <IonIcon icon={radio} />
-          <IonLabel>Radiosender</IonLabel>
+        <IonTabButton tab="tab2" href="/lists" className="glass-tab-button">
+          <IonIcon icon={radioOutline} />
+          <IonLabel>Radio</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="tab3" href="/settings">
-          <IonIcon icon={cog} />
-          <IonLabel>Settings</IonLabel>
+        <IonTabButton tab="tab3" href="/playlist" className="glass-tab-button">
+          <IonIcon icon={musicalNotesOutline} />
+          <IonLabel>Playlists</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="tab4" href="/dashboard">
-          <IonIcon icon={cog} />
+        <IonTabButton tab="tab4" href="/dashboard" className="glass-tab-button">
+          <IonIcon icon={gridOutline} />
           <IonLabel>Dashboard</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="tab5" onClick={handleLoginLogout}>
-          <IonIcon icon={personCircleOutline} />
-          {(isLoggedIn === 'true' && <IonLabel>Logout</IonLabel>) || <IonLabel>Login</IonLabel>}
+        <IonTabButton tab="tab5" href="/settings" className="glass-tab-button">
+          <IonIcon icon={settingsOutline} />
+          <IonLabel>Settings</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="tab6" href="/playlist">
-            <IonIcon icon={list} />
-            <IonLabel>Playlists</IonLabel>
-            </IonTabButton>
+        <IonTabButton tab="tab6" onClick={handleLoginLogout} className="glass-tab-button">
+          <IonIcon icon={isLoggedIn === 'true' ? logOutOutline : logInOutline} />
+          <IonLabel>{isLoggedIn === 'true' ? 'Logout' : 'Login'}</IonLabel>
+        </IonTabButton>
       </IonTabBar>
     </IonTabs>
   );

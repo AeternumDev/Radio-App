@@ -3,11 +3,20 @@
   --safe-area-bottom: env(safe-area-inset-bottom, 0);
   --safe-area-left: env(safe-area-inset-left, 0);
   --safe-area-right: env(safe-area-inset-right, 0);
+  --font-space-grotesk: 'Space Grotesk', system-ui, sans-serif;
+  --font-inter: 'Inter', system-ui, sans-serif;
 }
+
 body {
   overflow: hidden;
   height: 100vh;
   width: 100vw;
+  font-family: var(--font-inter);
+}
+
+/* Premium Recap Title Font */
+.recap-title {
+  font-family: var(--font-space-grotesk);
 }
 
 /**
@@ -192,4 +201,790 @@ body {
   -webkit-box-shadow: 0px 0px 5px 5px #0099e0;
   -moz-box-shadow: 0px 0px 5px 5px #0099e0;
   box-shadow: 0px 0px 5px 5px #0099e0;
+}
+
+/* ========================================
+   Premium Glass Tab Bar
+   ======================================== */
+
+.glass-tab-bar {
+  --background: transparent;
+  background: rgba(12, 12, 14, 0.82) !important;
+  backdrop-filter: blur(32px) saturate(140%);
+  -webkit-backdrop-filter: blur(32px) saturate(140%);
+  border-top: 0.5px solid rgba(255, 255, 255, 0.06);
+  padding: 6px 8px 10px 8px;
+  padding-bottom: calc(10px + var(--safe-area-bottom, 0px));
+  height: auto;
+  min-height: 64px;
+}
+
+.glass-tab-button {
+  --color: rgba(255, 255, 255, 0.4);
+  --color-selected: rgba(255, 255, 255, 0.95);
+  --background: transparent;
+  position: relative;
+  transition: opacity 0.15s ease;
+  border-radius: 10px;
+  margin: 0 2px;
+  padding: 6px 6px;
+}
+
+.glass-tab-button.tab-selected {
+  --color-selected: #ffffff;
+}
+
+.glass-tab-button.tab-selected::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.glass-tab-button ion-icon {
+  font-size: 22px;
+  margin-bottom: 3px;
+}
+
+.glass-tab-button ion-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  text-transform: none;
+  opacity: 0.9;
+}
+
+.glass-tab-button.tab-selected ion-label {
+  font-weight: 600;
+}
+
+@media (hover: hover) {
+  .glass-tab-button:hover:not(.tab-selected) {
+    --color: rgba(255, 255, 255, 0.65);
+  }
+}
+
+.glass-tab-button:active {
+  opacity: 0.6;
+  transition: opacity 0.05s ease;
+}
+
+/* ========================================
+   Premium Glass Cards - Lists Page
+   ======================================== */
+
+.glass-list-container {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.glass-station-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 0.5px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: background 0.15s ease;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.glass-station-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.glass-station-card:active {
+  background: rgba(255, 255, 255, 0.02);
+  transition: background 0.05s ease;
+}
+
+.glass-station-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.glass-station-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Playing indicator on avatar */
+.station-playing-indicator {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.station-playing-indicator span {
+  width: 3px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2px;
+  animation: soundwave 0.8s ease-in-out infinite;
+}
+
+.station-playing-indicator span:nth-child(1) { height: 8px; animation-delay: 0s; }
+.station-playing-indicator span:nth-child(2) { height: 14px; animation-delay: 0.15s; }
+.station-playing-indicator span:nth-child(3) { height: 10px; animation-delay: 0.3s; }
+
+/* Quick play button on station card */
+.station-quick-play {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s ease;
+}
+
+.station-quick-play:active {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.glass-station-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.glass-station-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+  margin: 0 0 3px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.glass-station-description {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0 0 4px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.glass-station-track {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.35);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.glass-station-meta {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.glass-station-frequency {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 2px 0;
+}
+
+.glass-station-genre {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+  margin: 0;
+}
+
+/* Glass Page Header */
+.glass-page-header {
+  background: rgba(12, 12, 14, 0.85) !important;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-page-header ion-toolbar {
+  --background: transparent;
+}
+
+.glass-page-header ion-title {
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+.glass-back-btn {
+  --color: rgba(255, 255, 255, 0.8);
+}
+
+/* ========================================
+   Global Now Playing Bar
+   ======================================== */
+
+.global-now-playing {
+  position: fixed;
+  bottom: 74px;
+  left: 8px;
+  right: 8px;
+  z-index: 9999;
+  padding-bottom: var(--safe-area-bottom, 0px);
+}
+
+.global-now-playing.on-station-page {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.gnp-content {
+  background: rgba(20, 20, 24, 0.92);
+  backdrop-filter: blur(32px) saturate(150%);
+  -webkit-backdrop-filter: blur(32px) saturate(150%);
+  border: 0.5px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.gnp-content:active {
+  background: rgba(20, 20, 24, 0.85);
+}
+
+.gnp-artwork {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.gnp-artwork img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gnp-artwork-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 20px;
+}
+
+.gnp-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.gnp-track {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.gnp-title {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gnp-separator {
+  color: rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
+}
+
+.gnp-artist {
+  color: rgba(255, 255, 255, 0.6);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gnp-station {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  margin-top: 2px;
+}
+
+/* Sound wave visualizer */
+.gnp-visualizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 16px;
+  margin-right: 4px;
+}
+
+.gnp-visualizer span {
+  width: 2px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 1px;
+  height: 4px;
+  transition: height 0.1s ease;
+}
+
+.gnp-visualizer.playing span {
+  animation: soundwave 0.8s ease-in-out infinite;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.gnp-visualizer.playing span:nth-child(1) { animation-delay: 0s; }
+.gnp-visualizer.playing span:nth-child(2) { animation-delay: 0.15s; }
+.gnp-visualizer.playing span:nth-child(3) { animation-delay: 0.3s; }
+.gnp-visualizer.playing span:nth-child(4) { animation-delay: 0.45s; }
+
+@keyframes soundwave {
+  0%, 100% { height: 4px; }
+  50% { height: 14px; }
+}
+
+.gnp-play-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 18px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s ease;
+}
+
+.gnp-play-btn:active {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ========================================
+   Station Detail Page
+   ======================================== */
+
+.station-detail-content {
+  --background: #0a0a0c;
+}
+
+.station-not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  color: rgba(255, 255, 255, 0.4);
+  gap: 16px;
+}
+
+.station-not-found ion-icon {
+  font-size: 48px;
+  opacity: 0.5;
+}
+
+/* Hero Section */
+.station-hero {
+  position: relative;
+  height: 280px;
+  overflow: hidden;
+}
+
+.station-hero-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.station-hero-bg img {
+  filter: blur(40px) brightness(0.4);
+  transform: scale(1.2);
+}
+
+.station-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 10, 12, 0.3) 0%,
+    rgba(10, 10, 12, 0.6) 50%,
+    rgba(10, 10, 12, 1) 100%
+  );
+}
+
+.station-hero-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.station-logo-large {
+  width: 100px;
+  height: 100px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 16px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.station-logo-large img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.station-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.5px;
+}
+
+.station-tagline {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0 0 14px 0;
+  max-width: 280px;
+}
+
+.station-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.station-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.station-meta-item ion-icon {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* Play Section */
+.station-play-section {
+  padding: 0 20px;
+  margin-top: -20px;
+  position: relative;
+  z-index: 2;
+}
+
+.station-play-btn {
+  width: 100%;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.station-play-btn ion-icon {
+  font-size: 22px;
+}
+
+.station-play-btn:active {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.station-play-btn.playing {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Now Playing Section */
+.station-now-playing {
+  margin: 24px 20px 0;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 0.5px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.snp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.snp-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.snp-live-indicator {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.snp-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 100, 100, 0.8);
+  animation: livepulse 1.5s ease-in-out infinite;
+}
+
+@keyframes livepulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.snp-content {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.snp-artwork {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 24px;
+}
+
+.snp-artwork img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.snp-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.snp-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 3px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.snp-artist {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.snp-album {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.3);
+  margin: 4px 0 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Station Info Section */
+.station-info-section {
+  padding: 24px 20px 100px;
+}
+
+.station-section-title {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: rgba(255, 255, 255, 0.35);
+  margin: 0 0 12px 0;
+}
+
+.station-info-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 0.5px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.station-info-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+}
+
+.station-stream-url {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 0.5px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stream-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.stream-value {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  word-break: break-all;
+}
+
+/* Light mode support */
+@media (prefers-color-scheme: light) {
+  .glass-tab-bar {
+    background: rgba(248, 248, 250, 0.88) !important;
+    border-top-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  .glass-tab-button {
+    --color: rgba(0, 0, 0, 0.35);
+    --color-selected: rgba(0, 0, 0, 0.9);
+  }
+  
+  .glass-tab-button.tab-selected::after {
+    background: rgba(0, 0, 0, 0.75);
+  }
+  
+  .glass-station-card {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  .glass-station-card:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+  
+  .glass-station-name {
+    color: rgba(0, 0, 0, 0.88);
+  }
+  
+  .glass-station-description {
+    color: rgba(0, 0, 0, 0.45);
+  }
+  
+  .glass-station-track {
+    color: rgba(0, 0, 0, 0.35);
+  }
+  
+  .glass-station-frequency {
+    color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .glass-station-genre {
+    color: rgba(0, 0, 0, 0.3);
+  }
+  
+  .glass-page-header {
+    background: rgba(248, 248, 250, 0.9) !important;
+    border-bottom-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  .gnp-content {
+    background: rgba(255, 255, 255, 0.92);
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+  
+  .gnp-track {
+    color: rgba(0, 0, 0, 0.85);
+  }
+  
+  .gnp-artist {
+    color: rgba(0, 0, 0, 0.55);
+  }
+  
+  .gnp-station {
+    color: rgba(0, 0, 0, 0.35);
+  }
+  
+  .gnp-play-btn {
+    background: rgba(0, 0, 0, 0.06);
+    color: rgba(0, 0, 0, 0.8);
+  }
 }

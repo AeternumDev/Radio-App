@@ -10,6 +10,8 @@ export interface RootState {
     currentTrack: Track | null
     radioStations: RadioStation[]
     selectedStation: RadioStation | null
+    playingStation: RadioStation | null
+    isPlaying: boolean
   }
   
 export const createAppSelector = createSelector.withTypes<RootState>()
@@ -61,4 +63,18 @@ export const selectSelectedStation = createAppSelector(
         state => state.selectedStation
     ],
     selectedStation => selectedStation
+)
+
+export const selectPlayingStation = createAppSelector(
+    [
+        state => state.playingStation
+    ],
+    playingStation => playingStation
+)
+
+export const selectIsPlaying = createAppSelector(
+    [
+        state => state.isPlaying
+    ],
+    isPlaying => isPlaying
 )
