@@ -54,69 +54,70 @@ const recapStubData = (() => {
     coverArt,
   });
 
+  // IU Hochschule Radio Network Stations
   const stations: RadioStation[] = [
     {
-      id: 'aurora-101',
-      name: 'Aurora 101',
-      description: 'Indie, Synth & Dream Pop',
-      frequency: '101.2 FM',
+      id: 'iu-main',
+      name: 'IU Radio',
+      description: 'Das Hauptprogramm der IU Hochschule',
+      frequency: '100.1 FM',
       logo: coverA,
-      genre: 'Indie Pop',
-      streamUrl: 'https://stream.aurora.example',
+      genre: 'Campus Mix',
+      streamUrl: 'https://stream.iu-radio.de/main',
     },
     {
-      id: 'pulse-909',
-      name: 'Pulse 909',
-      description: 'Club, House & Electro',
-      frequency: '90.9 FM',
+      id: 'iu-study',
+      name: 'IU Study',
+      description: 'Konzentrierte Musik zum Lernen',
+      frequency: '100.2 FM',
       logo: coverB,
-      genre: 'House',
-      streamUrl: 'https://stream.pulse.example',
+      genre: 'Focus & Ambient',
+      streamUrl: 'https://stream.iu-radio.de/study',
     },
     {
-      id: 'nova-hiphop',
-      name: 'Nova Hiphop',
-      description: 'Rap, Beats & Neo-Soul',
-      frequency: '98.6 FM',
+      id: 'iu-beats',
+      name: 'IU Beats',
+      description: 'Elektronische Musik und aktuelle Hits',
+      frequency: '100.3 FM',
       logo: coverC,
-      genre: 'Hip-Hop',
-      streamUrl: 'https://stream.nova.example',
+      genre: 'Electronic & Pop',
+      streamUrl: 'https://stream.iu-radio.de/beats',
     },
   ];
 
-  // Erweiterte History mit mehr Tracks für bessere Statistiken
+  // Track history for recap statistics
   const history: Record<string, Track[]> = {
-    'aurora-101': [
-      makeTrack('Moonlit Drive', 'Luna Vale', 212, 35, 'Velvet Skies', coverA),
-      makeTrack('Soft Signals', 'Nova Bloom', 198, 62, 'Frequencies', coverB),
-      makeTrack('Echo Hearts', 'Luna Vale', 224, 93, 'Velvet Skies', coverA),
-      makeTrack('Neon Bloom', 'Kite Harbor', 205, 127, 'Bloomline', coverC),
-      makeTrack('Midnight Coast', 'Luna Vale', 238, 170, 'Velvet Skies', coverA),
-      makeTrack('Afterglow', 'The Paper Comets', 201, 210, 'Afterglow', coverB),
-      makeTrack('Starfall', 'Luna Vale', 195, 250, 'Velvet Skies', coverA),
-      makeTrack('Glass Ocean', 'Nova Bloom', 218, 290, 'Frequencies', coverB),
-      makeTrack('Dreamstate', 'Luna Vale', 232, 340, 'Velvet Skies', coverA),
-      makeTrack('Cascade', 'Kite Harbor', 189, 380, 'Bloomline', coverC),
+    'iu-main': [
+      makeTrack('Campus Morning', 'Study Sounds', 212, 35, 'Daily Focus', coverA),
+      makeTrack('Lecture Breaks', 'Ambient Works', 198, 62, 'Concentration', coverB),
+      makeTrack('Library Sessions', 'Study Sounds', 224, 93, 'Daily Focus', coverA),
+      makeTrack('Exam Prep', 'Focus Collective', 205, 127, 'Deep Work', coverC),
+      makeTrack('Campus Walk', 'Study Sounds', 238, 170, 'Daily Focus', coverA),
+      makeTrack('Coffee Break', 'Lofi Dreams', 201, 210, 'Chill Sessions', coverB),
+      makeTrack('Night Study', 'Study Sounds', 195, 250, 'Daily Focus', coverA),
+      makeTrack('Group Work', 'Ambient Works', 218, 290, 'Concentration', coverB),
+      makeTrack('Final Review', 'Study Sounds', 232, 340, 'Daily Focus', coverA),
+      makeTrack('Success Vibes', 'Focus Collective', 189, 380, 'Deep Work', coverC),
     ],
-    'pulse-909': [
-      makeTrack('Chrome Steps', 'Cityphase', 189, 22, 'Analog Heat', coverB),
-      makeTrack('Gravity Loop', 'Cityphase', 204, 58, 'Analog Heat', coverB),
-      makeTrack('Static Rush', 'Luna Vale', 196, 88, 'Remix Vault', coverC),
-      makeTrack('Circuit Kiss', 'Electra Lane', 214, 120, 'Midnight Club', coverA),
-      makeTrack('Night Drifter', 'Cityphase', 221, 155, 'Analog Heat', coverB),
-      makeTrack('Voltage Rain', 'Electra Lane', 207, 200, 'Midnight Club', coverA),
-      makeTrack('Bassline Bloom', 'Luna Vale', 193, 245, 'Remix Vault', coverC),
-      makeTrack('Synth Horizon', 'Cityphase', 245, 300, 'Analog Heat', coverB),
-      makeTrack('Pulse Width', 'Electra Lane', 198, 350, 'Midnight Club', coverA),
+    'iu-study': [
+      makeTrack('Deep Focus', 'Concentration FM', 189, 22, 'Study Mode', coverB),
+      makeTrack('Mind Clear', 'Concentration FM', 204, 58, 'Study Mode', coverB),
+      makeTrack('Brain Waves', 'Study Sounds', 196, 88, 'Alpha State', coverC),
+      makeTrack('Flow State', 'Productivity Lab', 214, 120, 'Work Music', coverA),
+      makeTrack('Calm Mind', 'Concentration FM', 221, 155, 'Study Mode', coverB),
+      makeTrack('Focus Zone', 'Productivity Lab', 207, 200, 'Work Music', coverA),
+      makeTrack('Study Loop', 'Study Sounds', 193, 245, 'Alpha State', coverC),
+      makeTrack('Peak Hours', 'Concentration FM', 245, 300, 'Study Mode', coverB),
+      makeTrack('Deadline Push', 'Productivity Lab', 198, 350, 'Work Music', coverA),
     ],
-    'nova-hiphop': [
-      makeTrack('Blueprints', 'Juno Rex', 230, 30, 'Frameworks', coverC),
-      makeTrack('Lowkey Lights', 'Luna Vale', 215, 72, 'Velvet Skies', coverA),
-      makeTrack('Streetglass', 'Juno Rex', 203, 118, 'Frameworks', coverC),
-      makeTrack('Golden Hours', 'Maya Flux', 226, 168, 'Golden Hours', coverB),
-      makeTrack('Headnod Theory', 'Juno Rex', 219, 260, 'Frameworks', coverC),
-      makeTrack('Concrete Dreams', 'Maya Flux', 241, 320, 'Golden Hours', coverB),
-      makeTrack('Vinyl Soul', 'Juno Rex', 208, 375, 'Frameworks', coverC),
+    'iu-beats': [
+      makeTrack('Campus Party', 'IU DJs', 230, 30, 'Weekend Vibes', coverC),
+      makeTrack('Study Break', 'Study Sounds', 215, 72, 'Daily Focus', coverA),
+      makeTrack('Night Drive', 'IU DJs', 203, 118, 'Weekend Vibes', coverC),
+      makeTrack('Semester End', 'Celebration Mix', 226, 168, 'Party Time', coverB),
+      makeTrack('Festival Mode', 'IU DJs', 219, 260, 'Weekend Vibes', coverC),
+      makeTrack('Victory Lap', 'Celebration Mix', 241, 320, 'Party Time', coverB),
+      makeTrack('Future Sounds', 'IU DJs', 208, 375, 'Weekend Vibes', coverC),
     ],
   };
 
@@ -268,170 +269,146 @@ type RecapData = {
    SLIDE COMPONENTS - Jede Seite hat ein einzigartiges Layout
    ───────────────────────────────────────────────────────────────────────────── */
 
-// Slide 1: Hero Intro - Immersive fullscreen experience
+// Slide 1: Hero Intro - Clean, professional design
 const SlideIntro = ({ data, isActive }: { data: RecapData; isActive: boolean }) => (
   <div className="h-full w-full flex flex-col items-center justify-center relative overflow-hidden bg-[#0a0014]">
-    {/* Animated gradient background */}
-    <div className="absolute inset-0 bg-gradient-to-br from-violet-950/80 via-purple-900/60 to-fuchsia-900/80" />
-    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-pink-500/20 via-transparent to-transparent" />
-    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-500/20 via-transparent to-transparent" />
+    {/* Subtle gradient background */}
+    <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950" />
+    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-900/30 via-transparent to-transparent" />
     
-    {/* Floating orbs */}
-    <FloatingOrb delay={0} size={400} color="rgba(168,85,247,0.4)" position={{ top: '-15%', right: '-15%' }} />
-    <FloatingOrb delay={1.5} size={300} color="rgba(236,72,153,0.3)" position={{ bottom: '5%', left: '-10%' }} />
-    <FloatingOrb delay={0.8} size={200} color="rgba(99,102,241,0.35)" position={{ top: '35%', left: '50%' }} />
+    {/* Minimal accent */}
+    <FloatingOrb delay={0} size={500} color="rgba(99,102,241,0.15)" position={{ top: '-20%', right: '-20%' }} />
     
-    {/* Subtle grid pattern */}
-    <div className="absolute inset-0 opacity-5" style={{ 
-      backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
-      backgroundSize: '50px 50px'
-    }} />
-    
-    <div className={`text-center z-10 px-6 transition-all duration-1000 ${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
-      {/* Glowing badge */}
-      <div className="mb-8 relative">
-        <div className="absolute inset-0 blur-xl bg-purple-500/30 rounded-full scale-150" />
-        <span className="relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md text-white/90 text-xs font-semibold tracking-[0.25em] border border-white/10">
-          <IonIcon icon={sparklesOutline} className="text-sm" />
-          DEIN PERSÖNLICHER
+    <div className={`flex-1 flex flex-col items-center justify-center z-10 px-6 py-8 transition-all duration-1000 ${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+      {/* Badge */}
+      <div className="mb-6">
+        <span className="inline-block px-4 py-2 rounded-md bg-white/5 text-white/70 text-xs font-medium tracking-[0.2em] uppercase border border-white/10">
+          Dein Jahresrückblick
         </span>
       </div>
       
-      {/* Main title with glow effect */}
-      <div className="relative">
-        <h1 className="recap-title text-7xl font-black text-white mb-1 tracking-tighter" style={{ textShadow: '0 0 80px rgba(168,85,247,0.5)' }}>
-          RADIO
+      {/* Main title */}
+      <div className="text-center">
+        <h1 className="text-5xl sm:text-6xl font-semibold text-white mb-2 tracking-tight" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+          Radio
         </h1>
-        <h1 className="recap-title text-8xl font-black tracking-tighter leading-none" style={{ 
-          background: 'linear-gradient(135deg, #f472b6 0%, #c084fc 25%, #818cf8 50%, #c084fc 75%, #f472b6 100%)',
-          backgroundSize: '200% 200%',
+        <h1 className="text-6xl sm:text-7xl font-bold tracking-tight" style={{ 
+          fontFamily: 'system-ui, -apple-system, sans-serif',
+          background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%)',
           WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          animation: 'gradient 4s ease infinite',
-          textShadow: '0 0 100px rgba(196,132,252,0.4)'
+          WebkitTextFillColor: 'transparent'
         }}>
-          RECAP
+          Recap
         </h1>
-        <p className="text-2xl font-light text-white/50 mt-2 tracking-widest">2 0 2 6</p>
+        <p className="text-lg text-white/40 mt-3 font-light tracking-wide">2026</p>
       </div>
       
-      {/* Stats row with glassmorphism */}
-      <div className="flex items-center justify-center gap-4 mt-16">
+      {/* Stats row */}
+      <div className="flex items-center justify-center gap-3 mt-auto pt-8 max-w-full">
         {[
           { value: data.totalTracks, label: 'Songs', icon: musicalNotesOutline },
           { value: Math.round(data.totalMinutes / 60), label: 'Stunden', icon: timeOutline, suffix: 'h' },
-          { value: data.uniqueArtists, label: 'Artists', icon: micOutline },
-        ].map((stat, i) => (
-          <div key={stat.label} className="relative group">
-            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 rounded-3xl blur-xl group-hover:blur-2xl transition-all" />
-            <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl px-6 py-5 border border-white/10 min-w-[100px]">
-              <IonIcon icon={stat.icon} className="text-3xl text-white/70 mb-1" />
-              <p className="text-3xl font-black text-white">
-                <AnimatedNumber value={stat.value} suffix={stat.suffix} />
-              </p>
-              <p className="text-white/50 text-xs font-medium tracking-wider mt-1">{stat.label}</p>
-            </div>
+          { value: data.uniqueArtists, label: 'Künstler', icon: micOutline },
+        ].map((stat) => (
+          <div key={stat.label} className="bg-white/5 backdrop-blur-sm rounded-xl px-4 py-4 border border-white/10 min-w-[90px] text-center">
+            <IonIcon icon={stat.icon} className="text-xl text-indigo-400/80 mb-2" />
+            <p className="text-2xl font-semibold text-white" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+              <AnimatedNumber value={stat.value} suffix={stat.suffix} />
+            </p>
+            <p className="text-white/50 text-xs font-normal mt-1">{stat.label}</p>
           </div>
         ))}
       </div>
       
-      {/* Swipe indicator - horizontal arrow pointing right */}
-      <div className="mt-20 flex flex-col items-center">
-        <div className="flex items-center gap-3 px-5 py-3 rounded-full bg-white/5 backdrop-blur-sm border border-white/10">
-          <p className="text-white/40 text-xs tracking-widest">WISCHEN</p>
-          <IonIcon icon={chevronForwardOutline} className="text-white/50 text-lg animate-pulse" />
+      {/* Swipe indicator */}
+      <div className="mt-auto pt-8 pb-4">
+        <div className="flex items-center gap-2 px-4 py-2 text-white/30 text-xs tracking-wider">
+          <span>Weiter</span>
+          <IonIcon icon={chevronForwardOutline} className="text-sm" />
         </div>
       </div>
     </div>
-    
-    <style jsx>{`
-      @keyframes gradient {
-        0%, 100% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-      }
-    `}</style>
   </div>
 );
 
-// Slide 2: Top Artist Feature - Dramatic reveal
+// Slide 2: Top Artist Feature - Clean professional design
 const SlideTopArtist = ({ data, isActive }: { data: RecapData; isActive: boolean }) => {
   const topArtist = data.topArtists[0];
   const artistTrackCount = topArtist?.count || 0;
   const percentage = Math.round((artistTrackCount / data.totalTracks) * 100);
   
   return (
-    <div className="h-full w-full flex flex-col relative overflow-hidden bg-[#0f0515]">
-      {/* Dynamic background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-rose-950/90 via-pink-900/70 to-orange-900/80" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_var(--tw-gradient-stops))] from-rose-500/30 via-transparent to-transparent" />
+    <div className="h-full w-full flex flex-col relative overflow-hidden bg-slate-950">
+      {/* Subtle background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 to-slate-950" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-rose-900/20 via-transparent to-transparent" />
       
-      <FloatingOrb delay={0.5} size={350} color="rgba(244,63,94,0.4)" position={{ top: '-5%', left: '-15%' }} />
-      <FloatingOrb delay={1.5} size={250} color="rgba(251,146,60,0.3)" position={{ bottom: '10%', right: '-10%' }} />
+      <FloatingOrb delay={0.5} size={400} color="rgba(244,63,94,0.12)" position={{ top: '-10%', left: '-20%' }} />
       
-      <div className={`flex-1 flex flex-col justify-center px-8 z-10 transition-all duration-1000 delay-200 ${isActive ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
+      <div className={`flex-1 flex flex-col justify-center px-6 py-8 z-10 transition-all duration-700 ${isActive ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
         {/* Category label */}
         <div className="mb-4">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-rose-500/20 backdrop-blur-sm border border-rose-500/20 text-rose-300 text-xs font-semibold tracking-[0.2em]">
-            <span className="w-2 h-2 bg-rose-400 rounded-full animate-pulse" />
-            DEIN #1 ARTIST
+          <span className="inline-block px-3 py-1.5 rounded-md bg-rose-500/10 text-rose-300 text-xs font-medium tracking-wider uppercase border border-rose-500/20">
+            Top Künstler
           </span>
         </div>
         
-        {/* Artist name with dramatic styling */}
-        <h2 className="text-6xl font-black text-white leading-none mb-8" style={{ textShadow: '0 0 60px rgba(244,63,94,0.4)' }}>
+        {/* Artist name */}
+        <h2 className="text-4xl sm:text-5xl font-semibold text-white leading-tight mb-6" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
           {topArtist?.key || 'Luna Vale'}
         </h2>
         
         {/* Stats card */}
-        <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-6 border border-white/10 mb-8">
-          <div className="flex items-center gap-6">
-            <div className="relative">
-              <ProgressRing percent={percentage} size={110} strokeWidth={8} color="url(#pinkGradient)" />
+        <div className="bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-white/10 mb-6">
+          <div className="flex items-center gap-5">
+            <div className="relative flex-shrink-0">
+              <ProgressRing percent={percentage} size={80} strokeWidth={6} color="url(#pinkGradient)" />
               <svg width="0" height="0">
                 <defs>
                   <linearGradient id="pinkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" stopColor="#f472b6" />
-                    <stop offset="100%" stopColor="#fb923c" />
+                    <stop offset="100%" stopColor="#fb7185" />
                   </linearGradient>
                 </defs>
               </svg>
               <div className="absolute inset-0 flex items-center justify-center flex-col">
-                <span className="text-3xl font-black text-white">{percentage}</span>
-                <span className="text-xs text-white/50">Prozent</span>
+                <span className="text-xl font-semibold text-white">{percentage}%</span>
               </div>
             </div>
-            <div className="flex-1">
-              <p className="text-white/50 text-sm mb-1">Deiner gesamten Plays</p>
-              <p className="text-4xl font-black text-white">{artistTrackCount}</p>
-              <p className="text-pink-400 text-sm font-medium">Songs gehört</p>
+            <div className="flex-1 min-w-0">
+              <p className="text-white/50 text-sm mb-1">Anteil an allen Wiedergaben</p>
+              <p className="text-3xl font-semibold text-white">{artistTrackCount}</p>
+              <p className="text-rose-400/80 text-sm">Songs gehört</p>
             </div>
           </div>
         </div>
         
         {/* Other artists list */}
-        <div className="space-y-3">
-          <p className="text-white/40 text-xs font-semibold tracking-[0.2em] mb-4">DEINE TOP ARTISTS</p>
-          {data.topArtists.slice(1, 4).map((artist, i) => (
-            <div key={artist.key} className={`flex items-center gap-4 bg-white/5 backdrop-blur-sm rounded-2xl px-5 py-4 border border-white/5 transition-all duration-500 ${isActive ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`} style={{ transitionDelay: `${(i + 1) * 150}ms` }}>
-              <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-black text-lg ${
-                i === 0 ? 'bg-gradient-to-br from-slate-200 to-slate-400 text-slate-700' :
-                i === 1 ? 'bg-gradient-to-br from-amber-600 to-amber-800 text-amber-100' :
-                'bg-white/10 text-white/50'
-              }`}>
-                {i + 2}
+        <div className="flex-1 overflow-y-auto min-h-0">
+          <p className="text-white/40 text-xs font-medium tracking-wider uppercase mb-3">Weitere Top-Künstler</p>
+          <div className="space-y-2">
+            {data.topArtists.slice(1, 4).map((artist, i) => (
+              <div key={artist.key} className={`flex items-center gap-3 bg-white/5 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/5 transition-all duration-500 ${isActive ? 'translate-x-0 opacity-100' : 'translate-x-6 opacity-0'}`} style={{ transitionDelay: `${(i + 1) * 100}ms` }}>
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-semibold text-sm ${
+                  i === 0 ? 'bg-slate-600/50 text-slate-200' :
+                  i === 1 ? 'bg-amber-800/50 text-amber-200' :
+                  'bg-white/10 text-white/50'
+                }`}>
+                  {i + 2}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-white font-medium text-sm truncate">{artist.key}</p>
+                  <p className="text-white/40 text-xs">{artist.count} Wiedergaben</p>
+                </div>
+                <div className="h-1.5 w-16 bg-white/10 rounded-full overflow-hidden flex-shrink-0">
+                  <div 
+                    className="h-full bg-rose-500/70 rounded-full transition-all duration-700"
+                    style={{ width: isActive ? `${(artist.count / artistTrackCount) * 100}%` : '0%', transitionDelay: `${(i + 1) * 150}ms` }}
+                  />
+                </div>
               </div>
-              <div className="flex-1">
-                <p className="text-white font-semibold">{artist.key}</p>
-                <p className="text-white/40 text-sm">{artist.count} Plays</p>
-              </div>
-              <div className="h-2 w-24 bg-white/10 rounded-full overflow-hidden">
-                <div 
-                  className="h-full bg-gradient-to-r from-pink-500 to-orange-500 rounded-full transition-all duration-1000"
-                  style={{ width: isActive ? `${(artist.count / artistTrackCount) * 100}%` : '0%', transitionDelay: `${(i + 1) * 200}ms` }}
-                />
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -445,154 +422,152 @@ const SlideListeningHabits = ({ data, isActive }: { data: RecapData; isActive: b
   const barHeights = [2, 1, 1, 2, 4, 7, 5, 3, 4, 6, 8, 9, 7, 5, 4, 6, 8, 10, 9, 6, 4, 3, 2, 2];
   
   return (
-    <div className="h-full w-full flex flex-col relative overflow-hidden bg-[#051010]">
-      {/* Background effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-emerald-950/90 via-teal-900/70 to-cyan-900/80" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-emerald-500/20 via-transparent to-transparent" />
+    <div className="h-full w-full flex flex-col relative overflow-hidden bg-slate-950">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 to-slate-950" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-teal-900/20 via-transparent to-transparent" />
       
-      <FloatingOrb delay={0} size={300} color="rgba(20,184,166,0.35)" position={{ top: '-10%', right: '5%' }} />
-      <FloatingOrb delay={2} size={220} color="rgba(6,182,212,0.3)" position={{ bottom: '5%', left: '-5%' }} />
+      <FloatingOrb delay={0} size={350} color="rgba(20,184,166,0.12)" position={{ top: '-10%', right: '-10%' }} />
       
-      <div className={`flex-1 flex flex-col justify-center px-8 z-10 transition-all duration-1000 delay-200 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+      <div className={`flex-1 flex flex-col justify-center px-6 py-8 z-10 transition-all duration-700 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
         {/* Category badge */}
         <div className="mb-4">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-500/20 backdrop-blur-sm border border-teal-500/20 text-teal-300 text-xs font-semibold tracking-[0.2em]">
-            <span className="w-2 h-2 bg-teal-400 rounded-full animate-pulse" />
-            DEIN HÖRVERHALTEN
+          <span className="inline-block px-3 py-1.5 rounded-md bg-teal-500/10 text-teal-300 text-xs font-medium tracking-wider uppercase border border-teal-500/20">
+            Hörverhalten
           </span>
         </div>
         
         {/* Main headline */}
-        <h2 className="text-4xl font-black text-white leading-tight mb-1">
+        <h2 className="text-2xl font-medium text-white/80 leading-tight mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
           Du bist ein
         </h2>
-        <h2 className="text-6xl font-black leading-none mb-10" style={{ 
-          background: 'linear-gradient(135deg, #34d399 0%, #22d3d1 50%, #38bdf8 100%)',
+        <h2 className="text-4xl sm:text-5xl font-semibold leading-tight mb-6" style={{ 
+          fontFamily: 'system-ui, -apple-system, sans-serif',
+          background: 'linear-gradient(135deg, #2dd4bf 0%, #22d3ee 100%)',
           WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          textShadow: '0 0 80px rgba(34,211,209,0.4)'
+          WebkitTextFillColor: 'transparent'
         }}>
           {timeOfDay}-Hörer
         </h2>
         
         {/* Activity chart */}
-        <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-6 border border-white/10 mb-6">
-          <p className="text-white/40 text-xs font-semibold tracking-[0.15em] mb-4">DEINE AKTIVITÄT ÜBER 24H</p>
-          <div className="flex items-end justify-between h-28 gap-0.5 mb-3">
+        <div className="bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-white/10 mb-5">
+          <p className="text-white/40 text-xs font-medium tracking-wider uppercase mb-4">Aktivität über 24 Stunden</p>
+          <div className="flex items-end justify-between h-20 gap-0.5 mb-2">
             {barHeights.map((h, i) => (
               <div
                 key={i}
-                className={`flex-1 rounded-t-sm transition-all duration-700 ${
+                className={`flex-1 rounded-t-sm transition-all duration-500 ${
                   i === data.peakHour 
-                    ? 'bg-gradient-to-t from-emerald-500 via-teal-400 to-cyan-300' 
-                    : 'bg-white/15 hover:bg-white/25'
+                    ? 'bg-teal-500' 
+                    : 'bg-white/15'
                 }`}
                 style={{ 
                   height: isActive ? `${h * 10}%` : '0%',
-                  transitionDelay: isActive ? `${i * 25}ms` : '0ms'
+                  transitionDelay: isActive ? `${i * 20}ms` : '0ms'
                 }}
               />
             ))}
           </div>
-          <div className="flex justify-between text-white/30 text-xs font-medium">
+          <div className="flex justify-between text-white/30 text-xs">
             {hourLabels.map(l => <span key={l}>{l}h</span>)}
           </div>
         </div>
         
         {/* Stats grid */}
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-5 border border-white/10 text-center">
-            <p className="text-4xl font-black text-white mb-1">{data.listenStreak}</p>
-            <p className="text-teal-400/80 text-sm font-medium flex items-center justify-center gap-1">
-              Tage Streak <IonIcon icon={flameOutline} className="text-base" />
+        <div className="grid grid-cols-2 gap-3 mb-5">
+          <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 text-center">
+            <p className="text-3xl font-semibold text-white mb-1">{data.listenStreak}</p>
+            <p className="text-teal-400/80 text-sm flex items-center justify-center gap-1.5">
+              <IonIcon icon={flameOutline} className="text-sm" />
+              Tage am Stück
             </p>
           </div>
-          <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-5 border border-white/10 text-center">
-            <p className="text-4xl font-black text-white mb-1">{data.avgTracksPerDay}</p>
-            <p className="text-cyan-400/80 text-sm font-medium flex items-center justify-center gap-1">
-              Songs/Tag <IonIcon icon={flashOutline} className="text-base" />
+          <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 text-center">
+            <p className="text-3xl font-semibold text-white mb-1">{data.avgTracksPerDay}</p>
+            <p className="text-cyan-400/80 text-sm flex items-center justify-center gap-1.5">
+              <IonIcon icon={flashOutline} className="text-sm" />
+              Songs pro Tag
             </p>
           </div>
         </div>
         
-        {/* Fun fact */}
-        <div className="p-5 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 rounded-2xl border border-white/10 backdrop-blur-xl">
-          <p className="text-white/90 text-sm leading-relaxed flex items-start gap-3">
-            <IonIcon icon={headsetOutline} className="text-2xl text-emerald-400 flex-shrink-0 mt-0.5" />
-            <span>Deine längste Session dauerte <span className="text-emerald-400 font-bold">{formatDuration(data.longestSession)}</span> – 
-            da hat sich jemand im Sound verloren!</span>
-          </p>
+        {/* Session info */}
+        <div className="p-4 bg-white/5 rounded-xl border border-white/10">
+          <div className="flex items-center gap-3">
+            <IonIcon icon={headsetOutline} className="text-xl text-teal-400/70 flex-shrink-0" />
+            <p className="text-white/70 text-sm leading-relaxed">
+              Längste Session: <span className="text-teal-400 font-medium">{formatDuration(data.longestSession)}</span>
+            </p>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-// Slide 4: Top Station & Genre - Premium card design
+// Slide 4: Top Station & Genre - Clean professional design
 const SlideStation = ({ data, isActive }: { data: RecapData; isActive: boolean }) => {
   const station = data.topStation.station;
   
   return (
-    <div className="h-full w-full flex flex-col relative overflow-hidden bg-[#050a15]">
+    <div className="h-full w-full flex flex-col relative overflow-hidden bg-slate-950">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-950/90 via-blue-900/70 to-violet-900/80" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,_var(--tw-gradient-stops))] from-indigo-500/25 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 to-slate-950" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,_var(--tw-gradient-stops))] from-indigo-900/20 via-transparent to-transparent" />
       
-      <FloatingOrb delay={0.3} size={350} color="rgba(99,102,241,0.35)" position={{ top: '5%', left: '-15%' }} />
-      <FloatingOrb delay={1.8} size={280} color="rgba(139,92,246,0.3)" position={{ bottom: '-5%', right: '-10%' }} />
+      <FloatingOrb delay={0.3} size={400} color="rgba(99,102,241,0.12)" position={{ top: '-5%', left: '-15%' }} />
       
-      <div className={`flex-1 flex flex-col justify-center px-8 z-10 transition-all duration-1000 delay-200 ${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+      <div className={`flex-1 flex flex-col justify-center px-6 py-8 z-10 transition-all duration-700 ${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
         {/* Category badge */}
-        <div className="mb-6">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/20 backdrop-blur-sm border border-indigo-500/20 text-indigo-300 text-xs font-semibold tracking-[0.2em]">
-            <span className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse" />
-            DEIN HEIMATSENDER
+        <div className="mb-4">
+          <span className="inline-block px-3 py-1.5 rounded-md bg-indigo-500/10 text-indigo-300 text-xs font-medium tracking-wider uppercase border border-indigo-500/20">
+            Meistgehörter Sender
           </span>
         </div>
         
         {/* Station hero card */}
-        <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-6 border border-white/10 mb-6">
-          <div className="flex items-center gap-5 mb-6">
-            <div className="relative w-20 h-20 rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl">
+        <div className="bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-white/10 mb-5">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="relative w-16 h-16 rounded-xl overflow-hidden border border-white/20 flex-shrink-0">
               {station.logo && (
                 <Image src={station.logo} alt="" fill className="object-cover" />
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
             </div>
-            <div>
-              <h2 className="text-4xl font-black text-white leading-none">{station.name}</h2>
-              <p className="text-white/50 mt-1">{station.frequency}</p>
+            <div className="min-w-0">
+              <h2 className="text-2xl sm:text-3xl font-semibold text-white leading-tight truncate" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>{station.name}</h2>
+              <p className="text-white/50 text-sm mt-0.5">{station.frequency}</p>
             </div>
           </div>
           
-          <div className="flex flex-wrap gap-2 mb-4">
-            <span className="px-4 py-2 bg-indigo-500/20 rounded-full text-indigo-200 text-sm font-medium border border-indigo-500/20">
-              🎸 {station.genre}
+          <div className="flex flex-wrap gap-2 mb-3">
+            <span className="px-3 py-1.5 bg-indigo-500/15 rounded-lg text-indigo-200 text-xs font-medium border border-indigo-500/20">
+              {station.genre}
             </span>
-            <span className="px-4 py-2 bg-violet-500/20 rounded-full text-violet-200 text-sm font-medium border border-violet-500/20">
-              ▶️ {data.topStation.tracks.length} Plays
+            <span className="px-3 py-1.5 bg-violet-500/15 rounded-lg text-violet-200 text-xs font-medium border border-violet-500/20">
+              {data.topStation.tracks.length} Wiedergaben
             </span>
           </div>
           
-          <p className="text-white/40 text-sm italic">"{station.description}"</p>
+          <p className="text-white/40 text-sm">{station.description}</p>
         </div>
         
         {/* Top tracks list */}
-        <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-6 border border-white/10">
-          <p className="text-white/40 text-xs font-semibold tracking-[0.15em] mb-5">🏆 DEINE TOP SONGS HIER</p>
-          <div className="space-y-4">
+        <div className="bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-white/10 flex-1 min-h-0 overflow-y-auto">
+          <p className="text-white/40 text-xs font-medium tracking-wider uppercase mb-4">Top Songs auf diesem Sender</p>
+          <div className="space-y-3">
             {data.topTracks.slice(0, 3).map((track, i) => (
-              <div key={track.key} className={`flex items-center gap-4 transition-all duration-500 ${isActive ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`} style={{ transitionDelay: `${(i + 1) * 150}ms` }}>
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-black text-xl shadow-lg ${
-                  i === 0 ? 'bg-gradient-to-br from-yellow-300 to-amber-500 text-amber-900' :
-                  i === 1 ? 'bg-gradient-to-br from-slate-200 to-slate-400 text-slate-700' :
-                  'bg-gradient-to-br from-amber-600 to-amber-800 text-amber-100'
+              <div key={track.key} className={`flex items-center gap-3 transition-all duration-500 ${isActive ? 'translate-x-0 opacity-100' : 'translate-x-6 opacity-0'}`} style={{ transitionDelay: `${(i + 1) * 100}ms` }}>
+                <div className={`w-9 h-9 rounded-lg flex items-center justify-center font-semibold text-sm ${
+                  i === 0 ? 'bg-amber-500/20 text-amber-300' :
+                  i === 1 ? 'bg-slate-500/20 text-slate-300' :
+                  'bg-amber-700/20 text-amber-400'
                 }`}>
                   {i + 1}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-white font-semibold truncate">{track.key}</p>
-                  <p className="text-white/40 text-sm">{track.count}× gespielt</p>
+                  <p className="text-white font-medium text-sm truncate">{track.key}</p>
+                  <p className="text-white/40 text-xs">{track.count} Mal gespielt</p>
                 </div>
               </div>
             ))}
@@ -603,87 +578,83 @@ const SlideStation = ({ data, isActive }: { data: RecapData; isActive: boolean }
   );
 };
 
-// Slide 5: Summary & Personality - Grand finale
+// Slide 5: Summary & Personality - Clean finale
 const SlideSummary = ({ data, isActive }: { data: RecapData; isActive: boolean }) => (
-  <div className="h-full w-full flex flex-col relative overflow-hidden bg-[#0a0a0f]">
-    {/* Epic background */}
-    <div className="absolute inset-0 bg-gradient-to-br from-slate-950/90 via-zinc-900/70 to-neutral-900/80" />
-    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-500/15 via-transparent to-transparent" />
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,_var(--tw-gradient-stops))] from-purple-500/10 via-transparent to-transparent" />
+  <div className="h-full w-full flex flex-col relative overflow-hidden bg-slate-950">
+    {/* Subtle background */}
+    <div className="absolute inset-0 bg-gradient-to-b from-slate-900 to-slate-950" />
+    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-900/15 via-transparent to-transparent" />
     
-    <FloatingOrb delay={0} size={250} color="rgba(245,158,11,0.3)" position={{ top: '0%', right: '0%' }} />
-    <FloatingOrb delay={1} size={200} color="rgba(239,68,68,0.25)" position={{ bottom: '15%', left: '5%' }} />
-    <FloatingOrb delay={2} size={180} color="rgba(168,85,247,0.3)" position={{ top: '45%', right: '15%' }} />
+    <FloatingOrb delay={0} size={350} color="rgba(245,158,11,0.1)" position={{ top: '-5%', right: '-10%' }} />
     
-    <div className={`flex-1 flex flex-col justify-center px-8 z-10 transition-all duration-1000 delay-200 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+    <div className={`flex-1 flex flex-col justify-center px-6 py-8 z-10 transition-all duration-700 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
       {/* Personality reveal */}
-      <div className="text-center mb-8">
-        <div className="mb-4">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/20 backdrop-blur-sm border border-amber-500/20 text-amber-300 text-xs font-semibold tracking-[0.2em]">
-            <span className="w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
-            DEIN MUSIK-PROFIL
+      <div className="text-center mb-6">
+        <div className="mb-3">
+          <span className="inline-block px-3 py-1.5 rounded-md bg-amber-500/10 text-amber-300 text-xs font-medium tracking-wider uppercase border border-amber-500/20">
+            Dein Musikprofil
           </span>
         </div>
-        <h2 className="text-4xl font-black text-white mb-2">Du bist ein</h2>
-        <h2 className="text-6xl font-black leading-none" style={{ 
-          background: 'linear-gradient(135deg, #fbbf24 0%, #f97316 33%, #ef4444 66%, #ec4899 100%)',
+        <h2 className="text-2xl font-medium text-white/80 mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Du bist ein</h2>
+        <h2 className="text-4xl sm:text-5xl font-semibold" style={{ 
+          fontFamily: 'system-ui, -apple-system, sans-serif',
+          background: 'linear-gradient(135deg, #fbbf24 0%, #f97316 100%)',
           WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          textShadow: '0 0 80px rgba(249,115,22,0.4)'
+          WebkitTextFillColor: 'transparent'
         }}>
           {data.moodProfile}
         </h2>
       </div>
       
       {/* Percentile card */}
-      <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-6 border border-white/10 mb-6">
-        <div className="flex items-center justify-center gap-5">
-          <div className="relative">
-            <ProgressRing percent={100 - data.percentile} size={90} strokeWidth={6} color="url(#goldGradient)" />
+      <div className="bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-white/10 mb-5">
+        <div className="flex items-center justify-center gap-4">
+          <div className="relative flex-shrink-0">
+            <ProgressRing percent={100 - data.percentile} size={70} strokeWidth={5} color="url(#goldGradient)" />
             <svg width="0" height="0">
               <defs>
                 <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stopColor="#fbbf24" />
-                  <stop offset="100%" stopColor="#f97316" />
+                  <stop offset="100%" stopColor="#f59e0b" />
                 </linearGradient>
               </defs>
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
-              <IonIcon icon={trophyOutline} className="text-2xl text-amber-400" />
+              <IonIcon icon={trophyOutline} className="text-lg text-amber-400" />
             </div>
           </div>
           <div>
-            <p className="text-5xl font-black" style={{ 
-              background: 'linear-gradient(135deg, #fbbf24, #f97316)',
+            <p className="text-3xl font-semibold" style={{ 
+              fontFamily: 'system-ui, -apple-system, sans-serif',
+              background: 'linear-gradient(135deg, #fbbf24, #f59e0b)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent'
             }}>Top {data.percentile}%</p>
-            <p className="text-white/50 text-sm">aller Hörer dieses Jahr</p>
+            <p className="text-white/50 text-sm">aller Hörer in diesem Jahr</p>
           </div>
         </div>
       </div>
       
       {/* Final stats */}
-      <div className="grid grid-cols-3 gap-3 mb-8">
+      <div className="grid grid-cols-3 gap-2 mb-6">
         {[
-          { icon: musicalNotesOutline, value: data.totalTracks, label: 'Songs', color: 'from-pink-500/20 to-rose-500/20 border-pink-500/20' },
-          { icon: micOutline, value: data.uniqueArtists, label: 'Artists', color: 'from-purple-500/20 to-indigo-500/20 border-purple-500/20' },
-          { icon: radioOutline, value: 3, label: 'Sender', color: 'from-blue-500/20 to-cyan-500/20 border-blue-500/20' },
+          { icon: musicalNotesOutline, value: data.totalTracks, label: 'Songs', color: 'bg-rose-500/10 border-rose-500/20' },
+          { icon: micOutline, value: data.uniqueArtists, label: 'Künstler', color: 'bg-purple-500/10 border-purple-500/20' },
+          { icon: radioOutline, value: 3, label: 'Sender', color: 'bg-blue-500/10 border-blue-500/20' },
         ].map(stat => (
-          <div key={stat.label} className={`bg-gradient-to-br ${stat.color} rounded-2xl p-4 text-center border backdrop-blur-xl`}>
-            <IonIcon icon={stat.icon} className="text-2xl text-white/70 mb-1" />
-            <p className="text-white font-black text-2xl">{stat.value}</p>
+          <div key={stat.label} className={`${stat.color} rounded-xl p-3 text-center border backdrop-blur-sm`}>
+            <IonIcon icon={stat.icon} className="text-lg text-white/60 mb-1" />
+            <p className="text-white font-semibold text-xl">{stat.value}</p>
             <p className="text-white/50 text-xs">{stat.label}</p>
           </div>
         ))}
       </div>
       
       {/* Outro */}
-      <div className="text-center">
-        <p className="text-white/40 text-sm mb-5">Danke für ein großartiges Musikjahr!</p>
-        <div className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 rounded-full text-white font-bold text-lg shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 transition-shadow cursor-pointer">
-          <IonIcon icon={sparklesOutline} className="text-2xl" />
-          <span>Auf ein episches 2027!</span>
+      <div className="text-center mt-auto">
+        <p className="text-white/40 text-sm mb-4">Danke für ein großartiges Musikjahr</p>
+        <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 rounded-lg text-white font-medium text-sm">
+          Auf 2027
         </div>
       </div>
     </div>
@@ -751,9 +722,9 @@ const Feed = () => {
         return acc;
       }, {} as Record<string, number>);
       
-      const topGenre = Object.entries(genreCounts).sort((a, b) => b[1] - a[1])[0]?.[0] || 'Indie Pop';
+      const topGenre = Object.entries(genreCounts).sort((a, b) => b[1] - a[1])[0]?.[0] || 'Campus Mix';
 
-      const topAlbum = getTopItems(allTracks.filter(t => t.album).map(t => t.album!), 1)[0]?.key || 'Velvet Skies';
+      const topAlbum = getTopItems(allTracks.filter(t => t.album).map(t => t.album!), 1)[0]?.key || 'Daily Focus';
 
       // Simulierte erweiterte Statistiken
       const longestSession = 4200; // 70 min
@@ -761,13 +732,18 @@ const Feed = () => {
       const listenStreak = 12;
       const percentile = 8; // Top 8%
       
-      // Mood basierend auf Genre
+      // Mood basierend auf Genre - IU themed
       const moodMap: Record<string, string> = {
-        'Indie Pop': 'Dreamweaver',
-        'House': 'Nightowl',
-        'Hip-Hop': 'Beatmaster',
+        'Campus Mix': 'Studymaster',
+        'Focus & Ambient': 'Fokussiert',
+        'Electronic & Pop': 'Trendsetter',
+        'Lofi & Chillout': 'Entspannt',
+        'Talk & Podcast': 'Wissbegierig',
+        'Klassik': 'Kultiviert',
+        'World Music': 'Weltgewandt',
+        'Top 40 & Charts': 'Trendsetter',
       };
-      const moodProfile = moodMap[topGenre] || 'Soundexplorer';
+      const moodProfile = moodMap[topGenre] || 'Vielseitig';
 
       setRecapData({
         totalMinutes,
@@ -815,15 +791,14 @@ const Feed = () => {
   if (!recapData) {
     return (
       <IonPage>
-        <IonContent className="bg-[#0a0014]" fullscreen scrollY={false}>
-          <div className="h-full w-full flex items-center justify-center bg-gradient-to-br from-violet-950 via-purple-900 to-fuchsia-900">
+        <IonContent className="bg-slate-950" fullscreen scrollY={false}>
+          <div className="h-full w-full flex items-center justify-center bg-gradient-to-b from-slate-900 to-slate-950">
             <div className="text-center">
-              <div className="relative w-20 h-20 mx-auto mb-6">
-                <div className="absolute inset-0 rounded-full border-4 border-purple-500/30" />
-                <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-purple-500 animate-spin" />
-                <div className="absolute inset-3 rounded-full border-4 border-transparent border-t-pink-500 animate-spin" style={{ animationDirection: 'reverse', animationDuration: '0.8s' }} />
+              <div className="relative w-16 h-16 mx-auto mb-5">
+                <div className="absolute inset-0 rounded-full border-2 border-indigo-500/20" />
+                <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-indigo-500 animate-spin" />
               </div>
-              <p className="text-white/60 text-sm tracking-widest">DEIN RECAP WIRD GELADEN...</p>
+              <p className="text-white/50 text-sm">Recap wird geladen...</p>
             </div>
           </div>
         </IonContent>
