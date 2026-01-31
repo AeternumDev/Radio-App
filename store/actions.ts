@@ -1,6 +1,7 @@
 import Store from '.';
 import { ListItem, Settings, TodoListItem } from '../mock';
-import type { RadioStation } from '../lib/models';
+import type { RadioStation, Notification } from '../lib/models';
+import { SettingsRepository } from '@/lib/indexeddb/settings-repository';
 
 export const setMenuOpen = (open: boolean) => {
   Store.update(s => {
@@ -14,7 +15,12 @@ export const setNotificationsOpen = (open: boolean) => {
   });
 };
 
-export const setSettings = (settings: Settings) => {
+export const setSettings = async (settings?: Settings) => {
+  if(settings === null || settings === undefined) {
+    settings = await SettingsRepository.loadAll();
+  } else {
+    await SettingsRepository.saveAll(settings);
+  }
   Store.update(s => {
     s.settings = settings;
   });
@@ -53,5 +59,11 @@ export const setDone = (
     if (list === o.selectedList) {
       s.selectedList = s.lists[listIndex];
     }
+  });
+};
+
+export const addNotification = (notification: Notification) => {
+  Store.update(s => {
+    s.notifications.push(notification);
   });
 };

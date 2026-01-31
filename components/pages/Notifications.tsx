@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
   IonModal,
   IonHeader,
@@ -12,20 +13,33 @@ import {
   IonLabel,
 } from '@ionic/react';
 import Store from '../../store';
-import { selectNotifications } from '../../store/selectors';
-
 import { close } from 'ionicons/icons';
-import { type NotificationItem } from '../../mock';
+import { Notification } from '@/lib/models/notification';
+import { useAuth } from '@/lib/auth/auth-context';
 
 const NotificationItem = ({
   notification,
+  index,
+  handleDeleteClick,
 }: {
-  notification: NotificationItem;
+  notification: Notification;
+  index: number;
+  handleDeleteClick: (notification: Notification, index: number) => void;
 }) => (
   <IonItem>
     <IonLabel>{notification.title}</IonLabel>
-    <IonNote slot="end">{notification.when}</IonNote>
-    <IonButton slot="end" fill="clear" color="dark">
+    <IonNote slot="end">
+      {new Date(notification.when).toLocaleString('de-DE', {
+        dateStyle: 'medium',
+        timeStyle: 'short',
+      })}
+    </IonNote>
+    <IonButton
+      slot="end"
+      fill="clear"
+      color="dark"
+      onClick={() => handleDeleteClick(notification, index)}
+    >
       <IonIcon icon={close} />
     </IonButton>
   </IonItem>
@@ -38,7 +52,32 @@ const Notifications = ({
   open: boolean;
   onDidDismiss: () => void;
 }) => {
-  const notifications = Store.useState(selectNotifications);
+  const { sessionReady, user } = useAuth();
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+
+  useEffect(() => {
+    if (!sessionReady || !user) return;
+
+    // Initiale Notifications laden
+    setNotifications([...user.notifications]);
+
+    // Listener abonnieren
+    const addNotificationListener = (notification: Notification) => {
+      setNotifications(prev => [...prev, notification]);
+    };
+    user.onNotificationAdded(addNotificationListener);
+
+    // Cleanup beim Unmount
+    return () => { user.offNotificationAdded(addNotificationListener); };
+  }, [sessionReady, user]);
+
+  const handleDeleteClick = (notification: Notification, index: number) => {
+    user?.deleteNotification(notification, index).then(success => {
+      if (success) {
+        setNotifications(prev => prev.filter((_, i) => i !== index));
+      }
+    });
+  };
 
   return (
     <IonModal isOpen={open} onDidDismiss={onDidDismiss}>
@@ -63,7 +102,12 @@ const Notifications = ({
         </IonHeader>
         <IonList>
           {notifications.map((notification, i) => (
-            <NotificationItem notification={notification} key={i} />
+            <NotificationItem
+              notification={notification}
+              index={i}
+              key={i}
+              handleDeleteClick={handleDeleteClick}
+            />
           ))}
         </IonList>
       </IonContent>

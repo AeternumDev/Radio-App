@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { IonCard, IonCardContent, IonCardHeader, IonCardTitle } from '@ionic/react';
 import type { Track } from '@/lib/models';
+import ReviewModalButton from '@/components/ui/ReviewModalButton';
 
 type NowPlayingProps = {
   track: Track | null;
@@ -13,7 +14,7 @@ const NowPlaying = ({ track }: NowPlayingProps) => {
 
   return (
     <IonCard className="my-4">
-      <div className="flex items-center p-4 bg-gradient-to-r from-purple-500 to-pink-500 dark:from-purple-800 dark:to-pink-800">
+      <div className="flex flex-wrap items-center gap-4 p-4 bg-gradient-to-r from-purple-500 to-pink-500 dark:from-purple-800 dark:to-pink-800">
         {track.coverArt && (
           <div className="w-20 h-20 relative flex-shrink-0 mr-4">
             <Image
@@ -24,7 +25,7 @@ const NowPlaying = ({ track }: NowPlayingProps) => {
             />
           </div>
         )}
-        <div className="flex-grow text-white">
+        <div className="flex-grow text-white min-w-0">
           <p className="text-xs uppercase font-semibold mb-1 opacity-90">
             Jetzt läuft
           </p>
@@ -39,6 +40,9 @@ const NowPlaying = ({ track }: NowPlayingProps) => {
               Album: {track.album}
             </p>
           )}
+          <div className="mt-3 flex justify-end w-auto">
+              <ReviewModalButton moderatorId={track.moderatorId!} />
+          </div>
         </div>
       </div>
     </IonCard>

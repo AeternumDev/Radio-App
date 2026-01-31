@@ -19,4 +19,5 @@ module.exports = {
     '@stencil/core',
     'ionicons',
   ],
+  allowedDevOrigins: ['192.168.2.112'],
 };

@@ -1,11 +1,12 @@
 import { createSelector } from 'reselect';
-import { HomeItem, NotificationItem, Settings, TodoListItem } from '../mock';
-import type { Track, RadioStation } from '../lib/models';
+
+import { HomeItem, TodoListItem } from '../mock';
+import type { Track, RadioStation, Notification, Settings } from '@/lib/models';
 
 export interface RootState {
     homeItems: HomeItem[]
     lists: TodoListItem[]
-    notifications: NotificationItem[]
+    notifications: Notification[]
     settings: Settings
     currentTrack: Track | null
     radioStations: RadioStation[]
@@ -14,12 +15,13 @@ export interface RootState {
   
 export const createAppSelector = createSelector.withTypes<RootState>()
 
-export const selectHomeItems = createAppSelector(
-    [
-      state => state.homeItems
-    ],
-    homeItems => homeItems
-  )
+// export const selectHomeItems = createAppSelector(
+//     [
+//       state => state.homeItems
+//     ],
+//     homeItems => homeItems
+//   )
+export const selectHomeItems = (state: RootState) => state.homeItems;
 
 export const selectLists = createAppSelector(
     [
@@ -28,12 +30,13 @@ export const selectLists = createAppSelector(
     lists => lists
 )
 
-export const selectNotifications = createAppSelector(
-    [
-        state => state.notifications
-    ],
-    notifications => notifications
-)
+// export const selectNotifications = createAppSelector(
+//     [
+//         state => state.notifications
+//     ],
+//     notifications => notifications
+// )
+export const selectNotifications = (state: RootState) => state.notifications;
 
 export const selectSettings = createAppSelector(
     [
@@ -42,12 +45,13 @@ export const selectSettings = createAppSelector(
     settings => settings
 )
 
-export const selectCurrentTrack = createAppSelector(
-    [
-        state => state.currentTrack
-    ],
-    currentTrack => currentTrack
-)
+// export const selectCurrentTrack = createAppSelector(
+//     [
+//         state => state.currentTrack
+//     ],
+//     currentTrack => currentTrack
+// )
+export const selectCurrentTrack = (state: RootState) => state.currentTrack;
 
 export const selectRadioStations = createAppSelector(
     [

@@ -1,7 +1,7 @@
 import { Store as PullStateStore } from 'pullstate';
 
-import { lists, homeItems, notifications, settings, currentTrack, radioStations, TodoListItem, HomeItem, NotificationItem, Settings } from '../mock';
-import type { Track, RadioStation } from '../lib/models';
+import { lists, homeItems, notificationMocks, settingsMocks, currentTrack, radioStations, TodoListItem, HomeItem } from '@/mock';
+import type { Track, RadioStation, Notification, Settings } from '@/lib/models';
 
 type StoreProps = {
   safeAreaTop: number;
@@ -11,7 +11,7 @@ type StoreProps = {
   currentPage: number | null;
   homeItems: HomeItem[];
   lists: TodoListItem[];
-  notifications: NotificationItem[];
+  notifications: Notification[];
   settings: Settings;
   selectedList: TodoListItem | undefined;
   currentTrack: Track | null;
@@ -27,8 +27,8 @@ const Store = new PullStateStore<StoreProps>({
   currentPage: null,
   homeItems,
   lists,
-  notifications,
-  settings,
+  notifications: notificationMocks, // <- [ToDo] In Produktion mocks entfernen
+  settings : settingsMocks, // <- [ToDo] In Produktion mocks entfernen
   selectedList: undefined,
   currentTrack,
   radioStations,

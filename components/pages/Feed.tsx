@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Card from '../ui/Card';
 import NowPlaying from '../ui/NowPlaying';
+import { useNotificationCount } from '@/lib/hooks/use-notification-count';
 
 import {
   IonPage,
@@ -8,16 +9,21 @@ import {
   IonToolbar,
   IonTitle,
   IonButtons,
-  IonButton,
-  IonIcon,
   IonContent,
   IonMenuButton,
+  useIonRouter,
+  IonButton,
+  IonIcon,
+  IonLabel,
 } from '@ionic/react';
 import Notifications from './Notifications';
 import { useState } from 'react';
-import { notificationsOutline } from 'ionicons/icons';
 import { selectHomeItems, selectCurrentTrack } from '../../store/selectors';
 import Store from '../../store';
+import NotificationButton from '@/components/ui/NotificationButton';
+import ReviewButton from '@/components/ui/ReviewButton';
+import { useAuth } from '@/lib/auth/auth-context';
+import { personCircleOutline } from 'ionicons/icons';
 
 type FeedCardProps = {
   title: string;
@@ -75,7 +81,12 @@ const FeedCard = ({
 const Feed = () => {
   const homeItems = Store.useState(selectHomeItems);
   const currentTrack = Store.useState(selectCurrentTrack);
+
   const [showNotifications, setShowNotifications] = useState(false);
+  const notificationCount = useNotificationCount();
+  const router = useIonRouter();
+  const { sessionReady, isLoggedIn, isModerator, user, login, logout } =
+    useAuth();
 
   return (
     <IonPage>
@@ -86,9 +97,16 @@ const Feed = () => {
             <IonMenuButton />
           </IonButtons>
           <IonButtons slot="end">
-            <IonButton onClick={() => setShowNotifications(true)}>
-              <IonIcon icon={notificationsOutline} />
-            </IonButton>
+            {isModerator && (
+              <ReviewButton
+                className="text-center"
+                onClick={() => router.push('/reviews')}
+              />
+            )}
+            <NotificationButton
+              count={notificationCount}
+              onClick={() => setShowNotifications(true)}
+            />
           </IonButtons>
         </IonToolbar>
       </IonHeader>
