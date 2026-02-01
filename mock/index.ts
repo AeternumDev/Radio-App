@@ -1,3 +1,8 @@
+export { userMocks } from "./users.mock";
+export { reviewMocks } from "./reviews.mock";
+export { notificationMocks } from "./notifications.mock";
+export { settingsMocks } from "./settings.mock";
+
 export type HomeItem = {
   id: number;
   title: string;
@@ -36,19 +41,6 @@ export const homeItems: HomeItem[] = [
     authorAvatar: '/img/leo.jpg',
     image: '/img/c3.avif',
   },
-];
-
-export type NotificationItem = {
-  id: number;
-  title: string;
-  when: string;
-};
-
-export const notifications: NotificationItem[] = [
-  { id: 1, title: 'New friend request', when: '6 hr' },
-  { id: 2, title: 'Please change your password', when: '1 day' },
-  { id: 3, title: 'You have a new message', when: '2 weeks' },
-  { id: 4, title: 'Welcome to the app!', when: '1 month' },
 ];
 
 export type ListItem = {
@@ -96,14 +88,6 @@ export const lists: TodoListItem[] = [
   },
 ];
 
-export type Settings = {
-  enableNotifications: boolean;
-};
-
-export const settings: Settings = {
-  enableNotifications: true,
-};
-
 // Currently playing track
 import type { Track } from '../lib/models';
 import type { RadioStation } from '../lib/models';
@@ -114,6 +98,7 @@ export const currentTrack: Track = {
   album: 'Focus Beats',
   coverArt: '/img/c1.avif',
   startTime: new Date(),
+  moderatorId: 2,
 };
 
 // IU Hochschule Radio Network - Similar to MDR brand structure

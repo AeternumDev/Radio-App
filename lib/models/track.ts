@@ -5,4 +5,5 @@ export type Track = {
   coverArt?: string;
   duration?: number;
   startTime?: Date;
+  moderatorId?: number;
 };
