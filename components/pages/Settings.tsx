@@ -13,6 +13,7 @@ import {
   useIonRouter,
   IonIcon,
 } from '@ionic/react';
+import HeaderActions from '@/components/ui/HeaderActions';
 
 import Store from '../../store';
 import * as selectors from '../../store/selectors';
@@ -27,9 +28,10 @@ const Settings = () => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader className="glass-page-header">
         <IonToolbar>
           <IonTitle>Settings</IonTitle>
+          <HeaderActions />
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">

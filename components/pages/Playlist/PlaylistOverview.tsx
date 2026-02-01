@@ -8,6 +8,7 @@ import {
   IonCardContent,
   IonButton,
 } from '@ionic/react';
+import HeaderActions from '@/components/ui/HeaderActions';
 import { useState } from 'react';
 
 // Song Type mit Eigenschaften
@@ -42,9 +43,10 @@ const PlaylistOverview = ({
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader className="glass-page-header">
         <IonToolbar>
           <IonTitle>{playlist.name}</IonTitle>
+          <HeaderActions />
         </IonToolbar>
       </IonHeader>
 

@@ -29,7 +29,7 @@ const SongRequest = ({ open, onClose }: Props) => {
 
   return (
     <IonModal isOpen={open}>
-      <IonHeader>
+      <IonHeader className="glass-page-header">
         <IonToolbar>
           <IonTitle>Song wünschen</IonTitle>
         </IonToolbar>

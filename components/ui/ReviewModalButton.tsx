@@ -20,9 +20,10 @@ import { star } from 'ionicons/icons';
 type ReviewModalButtonProps = {
   moderatorId: number;
   className?: string;
+  style?: React.CSSProperties;
 };
 
-const ReviewModalButton = ({ moderatorId, className }: ReviewModalButtonProps) => {
+const ReviewModalButton = ({ moderatorId, className, style }: ReviewModalButtonProps) => {
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
@@ -61,7 +62,8 @@ const ReviewModalButton = ({ moderatorId, className }: ReviewModalButtonProps) =
       <IonButton
         size="small"
         expand="block"
-        className={`w-full w-auto ${className}`}
+        className={`${className}`}
+        style={style}
         onClick={() => setShowReviewModal(true)}
       >
         Moderator Bewerten

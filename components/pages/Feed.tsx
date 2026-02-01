@@ -2,25 +2,15 @@
 
 import Image from 'next/image';
 import { useEffect, useMemo, useState, useCallback } from 'react';
-import { useNotificationCount } from '@/lib/hooks/use-notification-count';
 import {
   IonPage,
   IonHeader,
   IonToolbar,
   IonTitle,
-  IonButtons,
   IonContent,
-  IonMenuButton,
-  useIonRouter,
-  IonButton,
   IonIcon,
-  IonLabel,
 } from '@ionic/react';
-import Notifications from './Notifications';
-import NotificationButton from '@/components/ui/NotificationButton';
-import ReviewButton from '@/components/ui/ReviewButton';
-import { useAuth } from '@/lib/auth/auth-context';
-import { personCircleOutline } from 'ionicons/icons';
+import HeaderActions from '@/components/ui/HeaderActions';
 
 import {
   musicalNotesOutline,
@@ -681,10 +671,6 @@ const SlideSummary = ({ data, isActive }: { data: RecapData; isActive: boolean }
    ───────────────────────────────────────────────────────────────────────────── */
 
 const Feed = () => {
-  const [showNotifications, setShowNotifications] = useState(false);
-  const notificationCount = useNotificationCount();
-  const router = useIonRouter();
-  const { sessionReady, isLoggedIn, isModerator, user, login, logout } = useAuth();
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [recapData, setRecapData] = useState<RecapData | null>(null);
@@ -828,24 +814,10 @@ const Feed = () => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader className="glass-page-header">
         <IonToolbar>
           <IonTitle>Feed</IonTitle>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonButtons slot="end">
-            {isModerator && (
-              <ReviewButton
-                className="text-center"
-                onClick={() => router.push('/reviews')}
-              />
-            )}
-            <NotificationButton
-              count={notificationCount}
-              onClick={() => setShowNotifications(true)}
-            />
-          </IonButtons>
+          <HeaderActions />
         </IonToolbar>
       </IonHeader>
       <IonContent scrollY={false} fullscreen>

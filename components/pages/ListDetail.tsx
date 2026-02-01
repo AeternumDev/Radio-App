@@ -19,6 +19,8 @@ import {
 } from 'ionicons/icons';
 import { useEffect } from 'react';
 import Image from 'next/image';
+import ReviewModalButton from '@/components/ui/ReviewModalButton';
+import HeaderActions from '@/components/ui/HeaderActions';
 
 import Store from '../../store';
 import * as actions from '../../store/actions';
@@ -70,6 +72,7 @@ const StationDetail = () => {
               <IonBackButton defaultHref="/lists" />
             </IonButtons>
             <IonTitle>Station nicht gefunden</IonTitle>
+            <HeaderActions />
           </IonToolbar>
         </IonHeader>
         <IonContent>
@@ -90,6 +93,7 @@ const StationDetail = () => {
             <IonBackButton defaultHref="/lists" className="glass-back-btn" />
           </IonButtons>
           <IonTitle>{station.name}</IonTitle>
+          <HeaderActions />
         </IonToolbar>
       </IonHeader>
       <IonContent className="station-detail-content">
@@ -160,15 +164,14 @@ const StationDetail = () => {
                 </div>
               )}
             </div>
-            <div className="snp-content">
+            <div className="snp-content flex-wrap">
               <div className="snp-artwork">
                 {currentTrack.coverArt ? (
                   <Image
                     src={currentTrack.coverArt}
                     alt="Cover"
                     fill
-                    className="object-cover"
-                  />
+                    className="object-cover" />
                 ) : (
                   <IonIcon icon={musicalNotesOutline} />
                 )}
@@ -179,6 +182,12 @@ const StationDetail = () => {
                 {currentTrack.album && (
                   <p className="snp-album">{currentTrack.album}</p>
                 )}
+              </div>
+              <div className="overflow-hidden self-end w-full min-[475px]:w-auto min-[475px]:ml-auto flex min-w-200">
+                <ReviewModalButton
+                  moderatorId={currentTrack.moderatorId!}
+                  style={{ '--color': '#ffffff', '--background': 'rgba(255, 255, 255, 0.1)' } as React.CSSProperties & Record<string, string>}
+                />
               </div>
             </div>
           </div>

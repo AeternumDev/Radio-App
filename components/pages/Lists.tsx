@@ -9,6 +9,7 @@ import {
   IonTitle,
   IonContent,
 } from '@ionic/react';
+import HeaderActions from '@/components/ui/HeaderActions';
 import Image from 'next/image';
 import { useHistory } from 'react-router-dom';
 import { radioOutline, playOutline } from 'ionicons/icons';
@@ -106,6 +107,7 @@ const Lists = () => {
       <IonHeader translucent={true} className="glass-page-header">
         <IonToolbar>
           <IonTitle>Radiosender</IonTitle>
+          <HeaderActions />
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen={true}>

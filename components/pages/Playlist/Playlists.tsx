@@ -7,6 +7,7 @@ import {
   IonCard,
   IonCardContent,
 } from '@ionic/react';
+import HeaderActions from '@/components/ui/HeaderActions';
 import { useState, useEffect } from 'react';
 import PlaylistOverview from './PlaylistOverview';
 
@@ -109,9 +110,10 @@ const Playlists = () => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader className="glass-page-header">
         <IonToolbar>
           <IonTitle>Playlists</IonTitle>
+          <HeaderActions />
         </IonToolbar>
       </IonHeader>
 

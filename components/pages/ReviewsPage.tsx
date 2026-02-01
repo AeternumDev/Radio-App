@@ -1,4 +1,3 @@
-import { AuthService } from '@/lib/auth/auth-service';
 import {
   IonContent,
   IonPage,
@@ -7,22 +6,16 @@ import {
   IonTitle,
   IonButtons,
   IonMenuButton,
-  IonModal,
 } from '@ionic/react';
-import Notifications from './Notifications';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '@/lib/auth/auth-context';
-import { useNotificationCount } from '@/lib/hooks/use-notification-count';
-import { notificationsOutline } from 'ionicons/icons';
 import ReviewsPanel from '@/components/ui/ReviewsPanel';
-import NotificationButton from '@/components/ui/NotificationButton';
+import HeaderActions from '@/components/ui/HeaderActions';
 
 const ReviewsPage: React.FC = () => {
   const history = useHistory();
   const { sessionReady, isLoggedIn } = useAuth();
-  const [showNotifications, setShowNotifications] = useState(false);
-  const notificationCount = useNotificationCount();
 
   useEffect(() => {
     if (sessionReady && !isLoggedIn) {
@@ -32,18 +25,13 @@ const ReviewsPage: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader className="glass-page-header">
         <IonToolbar>
           <IonTitle>Bewertungen</IonTitle>
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonButtons slot="end">
-            <NotificationButton
-              count={notificationCount}
-              onClick={() => setShowNotifications(true)}
-            />
-          </IonButtons>
+          <HeaderActions />
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
@@ -54,10 +42,6 @@ const ReviewsPage: React.FC = () => {
         </IonHeader>
         <p className='ion-padding-start ion-padding-bottom ion-padding-end'>Unten werden Ihre Bewertungen angezeigt.</p>
         <ReviewsPanel />
-        <Notifications
-          open={showNotifications}
-          onDidDismiss={() => setShowNotifications(false)}
-        />
       </IonContent>
     </IonPage>
   );
