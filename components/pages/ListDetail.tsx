@@ -14,8 +14,7 @@ import {
   playOutline, 
   pauseOutline,
   musicalNotesOutline,
-  locationOutline,
-  signalOutline
+  locationOutline
 } from 'ionicons/icons';
 import { useEffect } from 'react';
 import Image from 'next/image';
@@ -130,7 +129,7 @@ const StationDetail = () => {
             
             <div className="station-meta-row">
               <span className="station-meta-item">
-                <IonIcon icon={signalOutline} />
+                <IonIcon icon={radioOutline} />
                 {station.frequency}
               </span>
               <span className="station-meta-item">
