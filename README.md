@@ -1,69 +1,127 @@
-# Next.js + Tailwind CSS + Ionic Framework + Capacitor Mobile Starter
+# Radio-App (Prototyp)
 
-![Screenshot](./screenshot.png)
+Prototypische Radio-App, entwickelt im Rahmen eines Gruppenprojekts an der **IU Internationale Hochschule**.
 
-This repo is a conceptual starting point for building an iOS, Android, and Progressive Web App with Next.js, Tailwind CSS, [Ionic Framework](https://ionicframework.com/), and [Capacitor](https://capacitorjs.com/).
+Die Anwendung basiert auf dem **Next.js + Tailwind CSS + Ionic Framework + Capacitor Mobile Starter** von Max Lynch:  
+https://github.com/mlynch/nextjs-tailwind-ionic-capacitor-starter
 
-Next.js handles the production React app experience, Tailwind can be used to style each page of your app, Ionic Framework provides the cross-platform system controls (navigation/transitions/tabs/etc.), and then Capacitor bundles all of it up and runs it on iOS, Android, and Web with full native access.
+## Zielsetzung und Funktionsumfang
 
-See this blog post for an overview of the stack and how it all works: <https://dev.to/ionic/build-mobile-apps-with-tailwind-css-next-js-ionic-framework-and-capacitor-3kij>
+Die Anwendung dient der prototypischen Darstellung zentraler Funktionen einer Radio-App. Implementiert sind:
 
-## Usage
+- **Radiosender-Informationen** inklusive Stream- und Playlist-Anzeige
+- **Bewertung der Playlist**
+- **Moderator-Bewertung** inklusive Kommentar; der Moderator erhält anschließend eine **Benachrichtigung**
+- **Song-Wunsch** (Song Request)
+- **Recap-Funktionen**:
+  - Top-Künstler
+  - Hörverhalten
+  - meist gehörter Sender
+  - Musikprofil
 
-This project is a standard Next.js app, so the typical Next.js development process applies (`npm run dev` for browser-based development). However, there is one caveat: the app must be exported to deploy to iOS and Android, since it must run purely client-side. ([more on Next.js export](https://nextjs.org/docs/advanced-features/static-html-export))
+## Demo-Benutzer und Persistenz
 
-To build the app, run:
+- Zwei Demo-Accounts sind in `mock/users.mock.ts` hinterlegt (Benutzer und Moderator).
+- Persistenz:
+  - Benutzerdaten und Einstellungen: **IndexedDB**
+  - Session: **Session Storage**
 
-```bash
+## Technischer Stack
+
+- **Next.js**
+- **Tailwind CSS**
+- **Ionic Framework (React)**
+- **Capacitor** (native Container-App für iOS/Android; Ausführung in einer WebView)
+
+## Plattformen
+
+- Android
+- iOS
+- Web / PWA (browserbasiert)
+
+## Voraussetzungen
+
+- **Node.js** und **npm**
+- Für Android: **Android Studio** inkl. Android SDK
+- Für iOS: macOS mit **Xcode**
+
+## Installation
+
+````bash
+npm install
+````
+
+`npm install` installiert alle in `package.json` definierten Abhängigkeiten (inklusive transitiver Abhängigkeiten) in `node_modules` und ist Voraussetzung für Build- und Laufzeitkommandos.
+
+## Entwicklung (Browser)
+
+Für die lokale Entwicklung wird ein Next.js-Entwicklungsserver verwendet:
+
+````bash
+npm run dev
+````
+
+- Die Anwendung ist anschließend typischerweise unter `http://localhost:3000` erreichbar.
+- Änderungen am Quellcode werden während der Entwicklung unmittelbar nach dem Speichern übernommen (Hot Reloading / Fast Refresh).
+- Für native Tests ohne Live Reload sind Export- und Sync-Schritte erforderlich (siehe unten).
+
+## Build (statischer Export)
+
+Für iOS/Android wird ein statischer Export genutzt, sodass die Anwendung vollständig im Client (Browser/WebView) ausgeführt wird:
+
+````bash
 npm run build
-```
+````
 
-All the client side files will be sent to the `./out/` directory. These files need to be copied to the native iOS and Android projects, and this is where Capacitor comes in:
+Das Ergebnis wird in `./out/` abgelegt.
 
-```bash
+## Capacitor Sync
+
+Nach dem Build werden die generierten statischen Dateien aus `./out/` in die nativen Plattformprojekte übernommen:
+
+````bash
 npm run sync
-```
+````
 
-Finally, use the following run commands to run the app on each platform:
+Dabei werden die Inhalte von `./out/` in die nativen Projektstrukturen von Android/iOS kopiert, sodass iOS/Android die Web-App innerhalb des nativen Containers laden können.
 
-```bash
-npm run ios
+## Native Runs
+
+````bash
 npm run android
-```
+npm run ios
+````
 
-## Livereload/Instant Refresh
+## Livereload / Instant Refresh (Capacitor)
 
-To enable Livereload and Instant Refresh during development (when running `npm run dev`), find the IP address of your local interface (ex: `192.168.1.2`) and port your Next.js server is running on, and then set the server url config value to point to it in `capacitor.config.json`:
+Für Live Reload in der nativen App muss die WebView die Anwendung von einem laufenden Entwicklungsserver (Dev-Server) laden, statt der eingebetteten Dateien. Dies kann entweder temporär über Run-Kommandos mit Live-Reload-Optionen (z. B. `npx cap run android -l --external`) oder dauerhaft über `server.url` in `capacitor.config.*` erfolgen.
 
-```json
+Beispiel (IP anpassen):
+````json
 {
   "server": {
     "url": "http://192.168.1.2:3000"
   }
 }
-```
-
-Note: this configuration wil be easier in Capacitor 3 which [recently went into beta](https://capacitorjs.com/blog/announcing-capacitor-3-0-beta).
+````
+Ohne Entwicklungsserver ist kein „echtes“ Live Reload in der nativen App möglich. Änderungen werden dann erst nach erneutem Sync sichtbar.
 
 ## API Routes
 
-API Routes can be used but some minimal configuration is required. See [this discussion](https://github.com/mlynch/nextjs-tailwind-ionic-capacitor-starter/issues/4#issuecomment-754030049) for more information.
+API Routes können verwendet werden, erfordern jedoch eine minimale Konfiguration. Details:  
+https://github.com/mlynch/nextjs-tailwind-ionic-capacitor-starter/issues/4#issuecomment-754030049
 
 ## SEO & Static Hosting
 
-- **Is the exported PWA crawlable?** By default this starter renders everything on the client (see `components/AppShell.tsx`), so the static build contains a minimal HTML shell that immediately hands off to JavaScript. Search engine bots that depend on server-rendered HTML will not see meaningful page content, so the project is not SEO-friendly out of the box. If you need full SEO support, SSR/SSG needs to be working on the routes you want indexed or using a parallel, SEO-optimized web surface, but take a look at the below caveat about this project.
-- **Can I host the export as static HTML?** Yes. `next.config.js` sets `output: 'export'`, so `npm run build` writes a fully static bundle to the `out/` directory. You can deploy those files to any static host (e.g. Vercel static, Netlify, S3, GitHub Pages) or let Capacitor copy them into the native shells.
+- Der statische Export enthält standardmäßig eine minimale HTML-Struktur (App-Shell) und übergibt die Darstellung an JavaScript. Die Anwendung ist daher nicht auf Suchmaschinenoptimierung ausgelegt.
+- Der Output in `out/` kann auch auf einem statischen Hoster ausgeliefert werden.
 
-## Caveats
+## Einschränkungen
 
-One caveat with this project: Because the app must be able to run purely client-side and use [Next.js's Export command](https://nextjs.org/docs/advanced-features/static-html-export), that means no Server Side Rendering in this code base. There is likely a way to SSR and a fully static Next.js app in tandem but it requires [a Babel plugin](https://github.com/erzr/next-babel-conditional-ssg-ssr) or would involve a more elaborate monorepo setup with code sharing that is out of scope for this project.
+- **Server Side Rendering** ist in diesem Projektansatz nicht vorgesehen, da für die nativen Builds ein rein clientseitiger statischer Export genutzt wird.
+- Die Navigation erfolgt primär über Ionic-Routing, um native Übergänge und konsistentes History-Management zu unterstützen.
 
-Additionally, Next.js routing is not really used much in this app beyond a catch-all route to render the native app shell and engage the Ionic React Router. This is primarily because Next.js routing is not set up to enable native-style transitions and history state management like the kind Ionic uses.
+## Credits
 
-## What is Capacitor?
-
-You can think of [Capacitor](https://capacitorjs.com/) as a sort of "electron for mobile" that runs standard web apps on iOS, Android, Desktop, and Web.
-
-Capacitor provides access to Native APIs and a plugin system for building any native functionality your app needs.
-
-Capacitor apps can also run in the browser as a Progressive Web App with the same code.
+Dieses Projekt basiert auf dem Starter von Max Lynch:  
+https://github.com/mlynch/nextjs-tailwind-ionic-capacitor-starter

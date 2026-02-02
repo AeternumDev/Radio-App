@@ -1,6 +1,6 @@
 import Store from '.';
-import { ListItem, Settings, TodoListItem } from '../mock';
-import type { RadioStation, Notification } from '../lib/models';
+import { ListItem, TodoListItem } from '../mock';
+import type { RadioStation, Notification, Settings } from '../lib/models';
 import { SettingsRepository } from '@/lib/indexeddb/settings-repository';
 
 export const setMenuOpen = (open: boolean) => {
