@@ -14,8 +14,7 @@ import {
   playOutline, 
   pauseOutline,
   musicalNotesOutline,
-  locationOutline,
-  pinOutline
+  locationOutline
 } from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -132,7 +131,7 @@ const StationDetail = () => {
             
             <div className="station-meta-row">
               <span className="station-meta-item">
-                <IonIcon icon={pinOutline} />
+                <IonIcon icon={radioOutline} />
                 {station.frequency}
               </span>
               <span className="station-meta-item">
