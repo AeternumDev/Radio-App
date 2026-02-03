@@ -77,11 +77,7 @@ const Tabs = () => {
               <IonIcon icon={radioOutline} />
               <IonLabel>Radio</IonLabel>
             </IonTabButton>
-            <IonTabButton tab="tab3" href="/playlist" className="glass-tab-button">
-              <IonIcon icon={musicalNotesOutline} />
-              <IonLabel>Playlists</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab="tab5" href="/settings" className="glass-tab-button">
+            <IonTabButton tab="tab3" href="/settings" className="glass-tab-button">
               <IonIcon icon={settingsOutline} />
               <IonLabel>Settings</IonLabel>
             </IonTabButton>

@@ -14,8 +14,10 @@ import {
   playOutline, 
   pauseOutline,
   musicalNotesOutline,
-  locationOutline
+  locationOutline,
+  pinOutline
 } from 'ionicons/icons';
+import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 import Image from 'next/image';
 import ReviewModalButton from '@/components/ui/ReviewModalButton';
@@ -37,6 +39,7 @@ const StationDetail = () => {
   const params = useParams<StationDetailParams>();
   const { listId } = params;
   const station = stations.find(s => s.id === listId);
+  const history = useHistory();
 
   const isThisStationPlaying = playingStation?.id === station?.id && isPlaying;
 
@@ -129,7 +132,7 @@ const StationDetail = () => {
             
             <div className="station-meta-row">
               <span className="station-meta-item">
-                <IonIcon icon={radioOutline} />
+                <IonIcon icon={pinOutline} />
                 {station.frequency}
               </span>
               <span className="station-meta-item">
@@ -208,6 +211,15 @@ const StationDetail = () => {
             )}
           </div>
         </div>
+
+        {/* Playlist of the Sender */}
+        <div className="station-playlists-section">
+          <button className="station-playlists-button" onClick={() => history.push('/playlist')}>
+            <IonIcon icon={musicalNotesOutline} />
+            <span>Unsere Playlists</span>
+          </button>
+        </div>
+
       </IonContent>
     </IonPage>
   );
