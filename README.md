@@ -53,14 +53,21 @@ npm install
 
 `npm install` installiert alle in `package.json` definierten Abhängigkeiten (inklusive transitiver Abhängigkeiten) in `node_modules` und ist Voraussetzung für Build- und Laufzeitkommandos.
 
-## Entwicklung (Browser)
+## Entwicklung (Browser) in Visual Studio Code
 
 Für die lokale Entwicklung wird ein Next.js-Entwicklungsserver verwendet:
+
+1. Projektordner in VS Code öffnen.
+2. Terminal öffnen (**Terminal → Neues Terminal**).
+3. Entwicklungsserver starten:
 
 ````bash
 npm run dev
 ````
 
+4. Browser öffnen: `http://localhost:3000`
+
+Hinweise:
 - Die Anwendung ist anschließend typischerweise unter `http://localhost:3000` erreichbar.
 - Änderungen am Quellcode werden während der Entwicklung unmittelbar nach dem Speichern übernommen (Hot Reloading / Fast Refresh).
 - Für native Tests ohne Live Reload sind Export- und Sync-Schritte erforderlich (siehe unten).
@@ -105,11 +112,6 @@ Beispiel (IP anpassen):
 }
 ````
 Ohne Entwicklungsserver ist kein „echtes“ Live Reload in der nativen App möglich. Änderungen werden dann erst nach erneutem Sync sichtbar.
-
-## API Routes
-
-API Routes können verwendet werden, erfordern jedoch eine minimale Konfiguration. Details:  
-https://github.com/mlynch/nextjs-tailwind-ionic-capacitor-starter/issues/4#issuecomment-754030049
 
 ## SEO & Static Hosting
 

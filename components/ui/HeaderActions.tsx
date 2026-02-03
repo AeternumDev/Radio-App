@@ -19,15 +19,15 @@ const HeaderActions = () => {
   return (
     <>
       <IonButtons slot="end">
+        <IonButton onClick={() => setSongRequestOpen(true)}>
+          Song wünschen
+        </IonButton>
         {isModerator && (
           <ReviewButton
             className="text-center"
             onClick={() => router.push('/reviews')}
           />
         )}
-        <IonButton onClick={() => setSongRequestOpen(true)}>
-          Song wünschen
-        </IonButton>
         <NotificationButton
           count={notificationCount}
           onClick={() => setShowNotifications(true)}
