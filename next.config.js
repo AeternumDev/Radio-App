@@ -1,4 +1,5 @@
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   basePath: '',
   images: {
     remotePatterns: [
@@ -12,12 +13,12 @@ module.exports = {
     unoptimized: true,
   },
   output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
-  swcMinify: true,
   transpilePackages: [
     '@ionic/react',
     '@ionic/core',
     '@stencil/core',
     'ionicons',
   ],
-  allowedDevOrigins: ['192.168.2.112'],
 };
+
+module.exports = nextConfig;
