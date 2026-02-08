@@ -117,6 +117,7 @@ export const radioStations: RadioStation[] = [
       album: 'IU Playlist 2026',
       coverArt: '/img/c1.avif',
       startTime: new Date(),
+      moderatorId: 2,
     },
   },
   {
@@ -133,6 +134,7 @@ export const radioStations: RadioStation[] = [
       album: 'Study Sessions Vol. 3',
       coverArt: '/img/c2.avif',
       startTime: new Date(),
+      moderatorId: 2,
     },
   },
   {
@@ -149,6 +151,7 @@ export const radioStations: RadioStation[] = [
       album: 'After Hours',
       coverArt: '/img/c3.avif',
       startTime: new Date(),
+      moderatorId: 2,
     },
   },
   {
@@ -165,6 +168,7 @@ export const radioStations: RadioStation[] = [
       album: 'Rainy Day Vibes',
       coverArt: '/img/c1.avif',
       startTime: new Date(),
+      moderatorId: 2,
     },
   },
   {
@@ -181,6 +185,7 @@ export const radioStations: RadioStation[] = [
       album: 'Wochenspiegel',
       coverArt: '/img/c2.avif',
       startTime: new Date(),
+      moderatorId: 2,
     },
   },
   {
@@ -197,6 +202,7 @@ export const radioStations: RadioStation[] = [
       album: 'Moonlight Classics',
       coverArt: '/img/c3.avif',
       startTime: new Date(),
+      moderatorId: 2,
     },
   },
   {
@@ -213,6 +219,7 @@ export const radioStations: RadioStation[] = [
       album: 'International Beats',
       coverArt: '/img/c1.avif',
       startTime: new Date(),
+      moderatorId: 2,
     },
   },
   {
@@ -229,6 +236,7 @@ export const radioStations: RadioStation[] = [
       album: 'Hits 2026',
       coverArt: '/img/c2.avif',
       startTime: new Date(),
+      moderatorId: 2,
     },
   },
 ];

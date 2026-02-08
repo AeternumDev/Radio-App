@@ -10,6 +10,7 @@ import {
   IonLabel,
   IonModal,
   IonTextarea,
+  IonAlert,
   IonTitle,
   IonToolbar,
 } from '@ionic/react';
@@ -25,16 +26,29 @@ type ReviewModalButtonProps = {
 
 const ReviewModalButton = ({ moderatorId, className, style }: ReviewModalButtonProps) => {
   const [showReviewModal, setShowReviewModal] = useState(false);
+  const [showLoginAlert, setShowLoginAlert] = useState(false);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
-  const { sessionReady, isModerator, user } = useAuth();
+  const { isLoggedIn } = useAuth();
   const activeRating = Number.isFinite(rating) ? rating : 0;
+
+  const handleOpenModal = () => {
+    if (!isLoggedIn) {
+      setShowLoginAlert(true);
+      return;
+    }
+    setShowReviewModal(true);
+  };
 
   const handleStarClick = (value: number) => {
     setRating(value);
   };
 
   const handleSubmit = () => {
+    if (!isLoggedIn) {
+      setShowLoginAlert(true);
+      return;
+    }
     if (!Number.isFinite(rating) || rating < 1 || rating > 5) {
       return;
     }
@@ -64,7 +78,7 @@ const ReviewModalButton = ({ moderatorId, className, style }: ReviewModalButtonP
         expand="block"
         className={`${className}`}
         style={style}
-        onClick={() => setShowReviewModal(true)}
+        onClick={handleOpenModal}
       >
         Moderator Bewerten
       </IonButton>
@@ -113,6 +127,13 @@ const ReviewModalButton = ({ moderatorId, className, style }: ReviewModalButtonP
           </div>
         </IonContent>
       </IonModal>
+      <IonAlert
+        isOpen={showLoginAlert}
+        header="Anmeldung erforderlich"
+        message="Bitte vorher im Account anmelden."
+        buttons={['OK']}
+        onDidDismiss={() => setShowLoginAlert(false)}
+      />
     </>
   );
 };
