@@ -8,9 +8,13 @@ type NotificationButtonProps = {
 
 const NotificationButton = ({ count, onClick }: NotificationButtonProps) => {
   return (
-    <IonButton className='mx-2' slot='icon-only' onClick={onClick}>
+    <IonButton className='mx-2' onClick={onClick}>
       <span className="relative inline-flex">
-        <IonIcon icon={notificationsCircleSharp} className="text-3xl" />
+        <IonIcon
+          icon={notificationsCircleSharp}
+          slot="icon-only"
+          className="text-3xl"
+        />
         {count > 0 && (
           <IonBadge
             color="danger"

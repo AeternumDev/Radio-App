@@ -19,6 +19,7 @@ const nextConfig = {
     '@stencil/core',
     'ionicons',
   ],
+  allowedDevOrigins: ['192.168.2.112'],
 };
 
 module.exports = nextConfig;

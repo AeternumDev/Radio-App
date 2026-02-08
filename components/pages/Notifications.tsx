@@ -56,7 +56,10 @@ const Notifications = ({
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
   useEffect(() => {
-    if (!sessionReady || !user) return;
+    if (!sessionReady || !user) {
+      setNotifications([]);
+      return;
+    }
 
     // Initiale Notifications laden
     setNotifications([...user.notifications]);
