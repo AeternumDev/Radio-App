@@ -30,7 +30,7 @@ const Settings = () => {
     <IonPage>
       <IonHeader className="glass-page-header">
         <IonToolbar>
-          <IonTitle>Settings</IonTitle>
+          <IonTitle>Einstellungen</IonTitle>
           <HeaderActions />
         </IonToolbar>
       </IonHeader>

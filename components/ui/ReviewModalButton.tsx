@@ -80,7 +80,7 @@ const ReviewModalButton = ({ moderatorId, className, style }: ReviewModalButtonP
         style={style}
         onClick={handleOpenModal}
       >
-        Moderator Bewerten
+        Moderator bewerten
       </IonButton>
       <IonModal
         isOpen={showReviewModal}
@@ -91,7 +91,7 @@ const ReviewModalButton = ({ moderatorId, className, style }: ReviewModalButtonP
             <IonTitle>Bewertung senden</IonTitle>
             <IonButtons slot="end">
               <IonButton onClick={() => setShowReviewModal(false)}>
-                Schließen
+                Schliessen
               </IonButton>
             </IonButtons>
           </IonToolbar>

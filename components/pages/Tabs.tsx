@@ -79,7 +79,7 @@ const Tabs = () => {
             </IonTabButton>
             <IonTabButton tab="tab3" href="/settings" className="glass-tab-button">
               <IonIcon icon={settingsOutline} />
-              <IonLabel>Settings</IonLabel>
+              <IonLabel>Einstellungen</IonLabel>
             </IonTabButton>
           </IonTabBar>
         </IonTabs>

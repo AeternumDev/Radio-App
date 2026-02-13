@@ -39,7 +39,7 @@ const Login: React.FC = () => {
   return (
     <IonPage>
       <IonContent className="ion-padding">
-        <h1 className="ion-text-center">Radio-App Login</h1>
+        <h1 className="ion-text-center">Radio-App Anmeldung</h1>
         <form onSubmit={handleLogin}>
           <IonItem className="my-1">
             <IonInput

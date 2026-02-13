@@ -86,7 +86,7 @@ const Notifications = ({
     <IonModal isOpen={open} onDidDismiss={onDidDismiss}>
       <IonHeader className="glass-page-header">
         <IonToolbar>
-          <IonTitle>Notifications</IonTitle>
+          <IonTitle>Benachrichtigungen</IonTitle>
           <IonButton
             slot="end"
             fill="clear"
@@ -100,7 +100,7 @@ const Notifications = ({
       <IonContent fullscreen>
         <IonHeader collapse="condense" className="glass-page-header">
           <IonToolbar>
-            <IonTitle size="large">Notifications</IonTitle>
+            <IonTitle size="large">Benachrichtigungen</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonList>

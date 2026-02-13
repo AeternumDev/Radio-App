@@ -33,7 +33,7 @@ export default function ReviewsPanel() {
     <IonList>
       {reviews.length === 0 && (
         <IonItem>
-          <IonLabel>Keine Reviews vorhanden</IonLabel>
+          <IonLabel>Keine Bewertungen vorhanden</IonLabel>
         </IonItem>
       )}
       {reviews.map((review, i) => (
