@@ -1,29 +1,25 @@
-import { User } from '@/lib/models/user';
 import { UserSession } from '@/lib/auth/user-session';
-import { UserEntity } from '@/lib/entities/user-entity';
-import { UserRepository } from '@/lib/indexeddb/user-repository';
-import { ReviewEntity } from '../entities/review-entity';
-import { SettingsRepository } from '../indexeddb/settings-repository';
-import { SettingsEntity } from '../entities/settings-entity';
+import { UserRepository, SettingsRepository } from '@/lib/indexeddb';
+import { UserEntity, ReviewEntity, SettingsEntity } from '@/lib/entities';
+import { RatingAPIStub } from '@/lib/api/rating-api-stubs';
+import { User, Review } from '@/lib/models';
 
 export class AuthService {
   private static _currentUser: UserEntity | undefined = undefined;
-  private static userUpdatesSource: EventSource | undefined = undefined;
-  public static readonly API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+  private static ratingService = new RatingAPIStub();
 
   static get currentUser(): UserEntity | undefined {
     return this._currentUser;
   }
 
   static set currentUser(value: UserEntity | undefined) {
-    if (this._currentUser instanceof UserEntity && value instanceof UserEntity){
-      return
+    if (
+      this._currentUser instanceof UserEntity &&
+      value instanceof UserEntity
+    ) {
+      return;
     }
     this._currentUser = value;
-  }
-
-  static isSseEnabled(): boolean {
-    return process.env.NEXT_PUBLIC_ENABLE_SSE === 'true';
   }
 
   static loginWithUser(user: User): UserEntity {
@@ -85,73 +81,6 @@ export class AuthService {
     return this.currentUser !== undefined;
   }
 
-  // Aktuelle Benutzerdaten per API-Aufruf vom Server zu holen
-  // (deaktiviert, bis Server-Route existiert)
-  // Setze z. B. in der .env: NEXT_PUBLIC_API_BASE_URL=https://api.domain.tld
-  static async fetchCurrentUserFromServer(
-    userId: number,
-  ): Promise<User | undefined> {
-    if (!this.API_BASE_URL || !userId) return undefined;
-
-    try {
-      const response = await fetch(`${this.API_BASE_URL}/users/${userId}`, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-      });
-      if (!response.ok) return undefined;
-      return (await response.json()) as User;
-    } catch {
-      return undefined;
-    }
-  }
-
-  // SSE-Ansatz (deaktiviert, bis Server-Route existiert)
-  // Abonniere Updates für den Benutzer mit der angegebenen ID
-  // Setze z. B. in der .env: NEXT_PUBLIC_API_BASE_URL=https://api.domain.tld
-  // und NEXT_PUBLIC_ENABLE_SSE=true
-  static subscribeToUserUpdates(
-    userId: number,
-    onUpdate: (user?: User) => void,
-  ): () => void {
-    if (!this.isSseEnabled() || !this.API_BASE_URL) return () => {};
-
-    if (this.userUpdatesSource) {
-      this.userUpdatesSource.close();
-      this.userUpdatesSource = undefined;
-    }
-
-    const source = new EventSource(
-      `${this.API_BASE_URL}/users/${userId}/events`,
-    );
-    this.userUpdatesSource = source;
-
-    source.onmessage = event => {
-      const data = JSON.parse(event.data) as {
-        type?: string;
-        user?: User;
-        userId?: number;
-      };
-      if (data.type === 'user.updated') {
-        if (data.user) {
-          onUpdate(data.user);
-        } else if (!data.userId || data.userId === userId) {
-          onUpdate();
-        }
-      }
-    };
-
-    source.onerror = () => {
-      // EventSource reconnects automatically; keep it open
-    };
-
-    return () => {
-      source.close();
-      if (this.userUpdatesSource === source) {
-        this.userUpdatesSource = undefined;
-      }
-    };
-  }
-
   static async sendReview(
     moderatorId: number,
     rating: number,
@@ -162,33 +91,26 @@ export class AuthService {
       throw new Error('Guests cannot submit reviews');
     }
 
+    let review: Review = {
+      id: 0,
+      userId: currentUser.id,
+      reviewerUserId: moderatorId,
+      rating: rating,
+      comment: comment,
+      when: Date.now(),
+    };
     if (currentUser.id === moderatorId) {
-      currentUser.addReview(
-        new ReviewEntity({
-          id: 0,
-          userId: currentUser.id,
-          rating: rating,
-          comment: comment,
-          when: Date.now(),
-        }),
-      );
+      currentUser.addReview(new ReviewEntity(review));
     } else {
       const modUser = await UserRepository.load(moderatorId);
       if (!modUser) {
         throw new Error('Moderator not found');
       }
       const modUserEntity = new UserEntity(modUser);
-      modUserEntity.addReview(
-        new ReviewEntity({
-          id: 0,
-          userId: currentUser.id,
-          rating: rating,
-          comment: comment,
-          when: Date.now(),
-        }),
-      );
+      modUserEntity.addReview(new ReviewEntity(review));
       await UserRepository.save(modUserEntity.toUser());
     }
+    await this.ratingService.submitRating(review);
     return true;
   }
 

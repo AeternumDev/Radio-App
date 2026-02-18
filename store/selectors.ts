@@ -13,16 +13,10 @@ export interface RootState {
     selectedStation: RadioStation | null
     playingStation: RadioStation | null
     isPlaying: boolean
-  }
-  
-export const createAppSelector = createSelector.withTypes<RootState>()
+}
 
-// export const selectHomeItems = createAppSelector(
-//     [
-//       state => state.homeItems
-//     ],
-//     homeItems => homeItems
-//   )
+export const createAppSelector = createSelector.withTypes<RootState>();
+
 export const selectHomeItems = (state: RootState) => state.homeItems;
 
 export const selectLists = createAppSelector(
@@ -32,12 +26,6 @@ export const selectLists = createAppSelector(
     lists => lists
 )
 
-// export const selectNotifications = createAppSelector(
-//     [
-//         state => state.notifications
-//     ],
-//     notifications => notifications
-// )
 export const selectNotifications = (state: RootState) => state.notifications;
 
 export const selectSettings = createAppSelector(
@@ -47,12 +35,6 @@ export const selectSettings = createAppSelector(
     settings => settings
 )
 
-// export const selectCurrentTrack = createAppSelector(
-//     [
-//         state => state.currentTrack
-//     ],
-//     currentTrack => currentTrack
-// )
 export const selectCurrentTrack = (state: RootState) => state.currentTrack;
 
 export const selectRadioStations = createAppSelector(
