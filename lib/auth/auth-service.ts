@@ -40,19 +40,14 @@ export class AuthService {
     username: string,
     password: string,
   ): Promise<UserEntity | undefined> {
-    try {
-      let users = await UserRepository.loadAll();
-      const user = users?.find(
-        u => u.username === username && u.password === password,
-      );
-      if (user) {
-        return this.loginWithUser(user);
-      }
-      return undefined;
-    } catch (error) {
-      console.error('Fehler beim Laden der Benutzerdaten:', error);
-      return undefined;
+    let users = await UserRepository.loadAll();
+    const user = users?.find(
+      u => u.username === username && u.password === password,
+    );
+    if (user) {
+      return this.loginWithUser(user);
     }
+    return undefined;
   }
 
   static logout() {
